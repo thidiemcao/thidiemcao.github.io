@@ -3,64 +3,282 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Thi ĐIỂM CAO cùng Thầy Hoàng MpC</title>
+<title>DiemCao | Thi đạt điểm CAO cùng Thầy Hoàng MpC</title>
 
 <style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,Helvetica,sans-serif;
+}
+
 body{
-    margin:0;
-    font-family:Arial,sans-serif;
-    background:#f5f7fb;
+background:#f3f6fb;
+color:#222;
 }
 
 header{
-    background:#0057ff;
-    color:white;
-    padding:18px;
-    text-align:center;
-    font-size:32px;
-    font-weight:bold;
+background:#0d6efd;
+color:#fff;
+padding:18px 8%;
+display:flex;
+justify-content:space-between;
+align-items:center;
+position:sticky;
+top:0;
+z-index:999;
+}
+
+.logo{
+font-size:28px;
+font-weight:bold;
+}
+
+nav a{
+color:#fff;
+text-decoration:none;
+margin-left:25px;
+font-size:18px;
 }
 
 .hero{
-    text-align:center;
-    padding:60px 20px;
+
+background:linear-gradient(135deg,#0d6efd,#4f8cff);
+
+padding:90px 20px;
+
+text-align:center;
+
+color:white;
+
 }
 
 .hero h1{
-    font-size:42px;
+
+font-size:52px;
+
+margin-bottom:20px;
+
+}
+
+.hero h2{
+
+font-size:34px;
+
+margin-bottom:20px;
+
+color:#ffe76a;
+
 }
 
 .hero p{
-    color:#555;
-    font-size:20px;
+
+font-size:22px;
+
+margin-bottom:40px;
+
 }
 
-button{
-    background:#0057ff;
-    color:white;
-    border:none;
-    padding:15px 35px;
-    border-radius:10px;
-    font-size:20px;
-    cursor:pointer;
+.btn{
+
+background:#fff;
+
+color:#0d6efd;
+
+padding:18px 45px;
+
+border-radius:12px;
+
+text-decoration:none;
+
+font-size:22px;
+
+font-weight:bold;
+
+transition:.3s;
+
+}
+
+.btn:hover{
+
+background:#ffe76a;
+
+}
+
+.stats{
+
+display:flex;
+
+justify-content:center;
+
+gap:35px;
+
+padding:50px;
+
+flex-wrap:wrap;
+
+}
+
+.box{
+
+background:white;
+
+width:250px;
+
+padding:35px;
+
+border-radius:18px;
+
+box-shadow:0 5px 20px rgba(0,0,0,.08);
+
+text-align:center;
+
+}
+
+.box h2{
+
+font-size:42px;
+
+color:#0d6efd;
+
+margin-bottom:10px;
+
+}
+
+.section-title{
+
+text-align:center;
+
+font-size:40px;
+
+margin-top:40px;
+
+margin-bottom:40px;
+
 }
 
 .cards{
-    display:flex;
-    justify-content:center;
-    gap:20px;
-    flex-wrap:wrap;
-    padding:40px;
+
+display:flex;
+
+flex-wrap:wrap;
+
+justify-content:center;
+
+gap:30px;
+
+padding:0 30px 60px;
+
 }
 
 .card{
-    width:220px;
-    background:white;
-    padding:25px;
-    border-radius:15px;
-    box-shadow:0 5px 15px rgba(0,0,0,.1);
-    text-align:center;
+
+background:white;
+
+width:280px;
+
+padding:35px;
+
+border-radius:20px;
+
+box-shadow:0 5px 20px rgba(0,0,0,.08);
+
+transition:.3s;
+
+text-align:center;
+
 }
+
+.card:hover{
+
+transform:translateY(-8px);
+
+}
+
+.card h3{
+
+font-size:30px;
+
+margin-bottom:15px;
+
+color:#0d6efd;
+
+}
+
+.card p{
+
+font-size:18px;
+
+line-height:1.6;
+
+}
+
+footer{
+
+background:#0d6efd;
+
+color:white;
+
+text-align:center;
+
+padding:45px 20px;
+
+line-height:2;
+
+margin-top:50px;
+
+}
+
+@media(max-width:768px){
+
+.logo{
+
+font-size:22px;
+
+}
+
+nav{
+
+display:none;
+
+}
+
+.hero h1{
+
+font-size:34px;
+
+}
+
+.hero h2{
+
+font-size:24px;
+
+}
+
+.hero p{
+
+font-size:18px;
+
+}
+
+.btn{
+
+font-size:18px;
+
+padding:15px 30px;
+
+}
+
+.section-title{
+
+font-size:30px;
+
+}
+
+}
+
 </style>
 
 </head>
@@ -68,34 +286,149 @@ button{
 <body>
 
 <header>
+
+<div class="logo">
+
 🎓 DiemCao
+
+</div>
+
+<nav>
+
+<a href="#">Trang chủ</a>
+
+<a href="#">Thi THPT</a>
+
+<a href="#">ĐGNL</a>
+
+<a href="#">Kiểm tra</a>
+
+<a href="#">Liên hệ</a>
+
+</nav>
+
 </header>
 
-<div class="hero">
-<h1>Thi thử như thi thật</h1>
-<p>Thực chiến đề thi thử THPT • ĐGNL • Kiểm tra định kỳ Toán THPT</p>
+<section class="hero">
 
-<button>Bắt đầu</button>
+<h1>Thi đạt điểm <span style="color:#ffe76a;">CAO</span></h1>
+
+<h2>cùng Thầy Hoàng MpC</h2>
+
+<p>
+
+Nền tảng thi thử THPT • Đánh giá năng lực • Kiểm tra định kỳ
+
+</p>
+
+<a class="btn" href="#">BẮT ĐẦU THI</a>
+
+</section>
+
+<section class="stats">
+
+<div class="box">
+
+<h2>1000+</h2>
+
+<p>Đề thi</p>
+
 </div>
 
-<div class="cards">
+<div class="box">
+
+<h2>5000+</h2>
+
+<p>Học sinh</p>
+
+</div>
+
+<div class="box">
+
+<h2>24/7</h2>
+
+<p>Luyện thi mọi lúc</p>
+
+</div>
+
+</section>
+
+<h2 class="section-title">
+
+Các kỳ thi
+
+</h2>
+
+<section class="cards">
 
 <div class="card">
-<h2>THPT</h2>
-<p>Thi tốt nghiệp</p>
+
+<h3>THPT</h3>
+
+<p>Thi thử tốt nghiệp THPT theo cấu trúc mới nhất.</p>
+
 </div>
 
 <div class="card">
-<h2>ĐGNL</h2>
-<p>Đánh giá năng lực</p>
+
+<h3>ĐGNL</h3>
+
+<p>Luyện thi Đánh giá năng lực các trường đại học.</p>
+
 </div>
 
 <div class="card">
-<h2>10-11-12</h2>
-<p>Kiểm tra định kỳ</p>
-</div>
+
+<h3>Lớp 10</h3>
+
+<p>Ôn thi tuyển sinh vào lớp 10.</p>
 
 </div>
+
+<div class="card">
+
+<h3>Toán 10-11-12</h3>
+
+<p>Kiểm tra định kỳ theo từng chương.</p>
+
+</div>
+
+</section>
+
+<footer>
+
+<h2>DiemCao</h2>
+
+<p>
+
+Thi đạt điểm CAO cùng Thầy Hoàng MpC
+
+</p>
+
+<br>
+
+<p>
+
+📘 Facebook: <b>Thầy Minh Hoàng</b>
+
+</p>
+
+<p>
+
+🎵 TikTok: <b>Thầy Hoàng và lũ trẻ yêu Toán</b>
+
+</p>
+
+<br>
+
+<p>
+
+© 2026 DiemCao. Mọi quyền được bảo lưu.
+
+</p>
+
+</footer>
 
 </body>
+
 </html>
