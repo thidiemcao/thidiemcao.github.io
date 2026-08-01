@@ -1,3 +1,96 @@
 <!DOCTYPE html>
-<html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Thi ĐIỂM CAO cùng Thầy Hoàng MpC</title>
+
+<link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+<header class="topbar">
+    <div class="logo">
+        🎓 <span>Thi ĐIỂM CAO cùng Thầy Hoàng MpC</span>
+    </div>
+
+    <div class="timer">
+        ⏰ <span id="time">90:00</span>
+    </div>
+</header>
+
+<div class="container">
+
+<div class="left">
+
+<h2 id="question-title">
+Câu 1
+</h2>
+
+<div id="question-content">
+
+Đây là nội dung câu hỏi.
+
+</div>
+
+<div class="answers">
+
+<label class="answer">
+<input type="radio" name="answer" value="A">
+<span id="textA">Đáp án A</span>
+</label>
+
+<label class="answer">
+<input type="radio" name="answer" value="B">
+<span id="textB">Đáp án B</span>
+</label>
+
+<label class="answer">
+<input type="radio" name="answer" value="C">
+<span id="textC">Đáp án C</span>
+</label>
+
+<label class="answer">
+<input type="radio" name="answer" value="D">
+<span id="textD">Đáp án D</span>
+</label>
+
+</div>
+
+<div class="buttons">
+
+<button id="prevBtn">
+← Câu trước
+</button>
+
+<button id="nextBtn">
+Câu tiếp →
+</button>
+
+<button id="submitBtn">
+Nộp bài
+</button>
+
+</div>
+
+</div>
+
+<div class="right">
+
+<h3>Danh sách câu</h3>
+
+<div id="question-grid">
+
+</div>
+
+</div>
+
+</div>
+
+<script src="js/questions.js"></script>
+<script src="js/exam.js"></script>
+
+</body>
 </html>
