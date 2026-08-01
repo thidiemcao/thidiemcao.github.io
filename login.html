@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Đăng nhập</title>
+
+<link rel="stylesheet" href="css/style.css">
+
+<style>
+.login-box{
+    max-width:500px;
+    margin:60px auto;
+    background:#fff;
+    padding:30px;
+    border-radius:15px;
+    box-shadow:0 5px 15px rgba(0,0,0,.1);
+}
+
+.login-box h1{
+    text-align:center;
+    color:#0057ff;
+}
+
+.login-box input{
+    width:100%;
+    padding:15px;
+    margin-top:15px;
+    border:1px solid #ccc;
+    border-radius:10px;
+    font-size:18px;
+    box-sizing:border-box;
+}
+
+.login-box button{
+    width:100%;
+    margin-top:20px;
+    padding:15px;
+    background:#0057ff;
+    color:white;
+    border:none;
+    border-radius:10px;
+    font-size:20px;
+    cursor:pointer;
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="login-box">
+
+<h1>🎓 Thi ĐIỂM CAO</h1>
+
+<input
+id="studentName"
+type="text"
+placeholder="Họ và tên">
+
+<input
+id="studentPhone"
+type="tel"
+placeholder="Số điện thoại">
+
+<button onclick="startExam()">
+
+BẮT ĐẦU THI
+
+</button>
+
+</div>
+
+<script>
+
+function startExam(){
+
+let name=document.getElementById("studentName").value.trim();
+
+let phone=document.getElementById("studentPhone").value.trim();
+
+if(name==""||phone==""){
+
+alert("Vui lòng nhập đầy đủ.");
+
+return;
+
+}
+
+localStorage.setItem("studentName",name);
+
+localStorage.setItem("studentPhone",phone);
+
+location.href="exam.html";
+
+}
+
+</script>
+
+</body>
+
+</html>
