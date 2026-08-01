@@ -47,10 +47,11 @@ body{
 }
 
 .right{
-    flex:1;
+    width:320px;
+    min-width:320px;
     background:white;
     border-radius:15px;
-    padding:20px;
+    padding:25px;
     box-shadow:0 5px 15px rgba(0,0,0,.1);
 }
 
@@ -176,4 +177,30 @@ button:hover{
 .buttons button{
     width:100%;
 }
+}
+@media (max-width:900px){
+
+.topbar{
+    flex-wrap:wrap;
+    gap:15px;
+}
+
+.logo{
+    width:100%;
+}
+
+.container{
+    display:block;
+}
+
+.left{
+    width:auto;
+}
+
+.right{
+    width:auto;
+    min-width:auto;
+    margin-top:20px;
+}
+
 }
