@@ -168,7 +168,7 @@ font-size:20px;
 <h1>🎓 Thi ĐIỂM CAO cùng Thầy Hoàng MpC</h1>
 
 <p>Thi THPT • Thi ĐGNL • Thi định kỳ 10, 11, 12</p>
-
+<div id="userBox" style="margin-top:15px;font-size:18px;"></div>
 </header>
 
 <section class="hero">
@@ -197,7 +197,7 @@ Luyện đề mọi lúc • Chấm điểm tự động • Thống kê kết q
 
 <p>Luyện đề thực chiến thi TN THPT</p>
 
-<button onclick="location.href='thpt.html'">
+<button onclick="vaoThi('thpt.html')">
 Làm bài
 </button>
 
@@ -209,7 +209,7 @@ Làm bài
 
 <p>Luyện đề thi đánh giá năng lực</p>
 
-<button onclick="location.href='dgnl.html'">
+<button onclick="vaoThi('dgnl.html')">
 Làm bài
 </button>
 
@@ -220,8 +220,8 @@ Làm bài
 <h3>💡 Tuyển sinh 10</h3>
 
 <p>Luyện đề thi TS10</p>
-
-<button onclick="location.href='ts10.html'">
+  
+<button onclick="vaoThi('ts10.html')">
 Làm bài
 </button>
 </div>
@@ -231,8 +231,8 @@ Làm bài
 <h3>📖 Kiểm tra</h3>
 
 <p>Kiểm tra định kỳ Toán 10,11,12</p>
-
-<button onclick="location.href='kiemtra.html'">
+  
+<button onclick="vaoThi('kiemtra.html')">
 Làm bài
 </button>
 </div>
@@ -256,6 +256,54 @@ Làm bài
 </p>
 
 </footer>
+<script>
 
+const ten = localStorage.getItem("studentName");
+
+if(ten){
+
+document.getElementById("userBox").innerHTML=`
+Xin chào <b>${ten}</b> 👋
+&nbsp;&nbsp;
+<button onclick="logout()"
+style="
+padding:6px 12px;
+border:none;
+border-radius:6px;
+cursor:pointer;
+">
+Đăng xuất
+</button>
+`;
+
+}
+
+function logout(){
+
+localStorage.removeItem("studentName");
+localStorage.removeItem("studentPhone");
+
+location.reload();
+
+}
+
+</script>
+  function vaoThi(trang){
+
+let sdt=localStorage.getItem("studentPhone");
+
+if(!sdt){
+
+alert("Bạn cần đăng nhập trước.");
+
+location.href="login.html";
+
+return;
+
+}
+
+location.href=trang;
+
+}
 </body>
 </html>
