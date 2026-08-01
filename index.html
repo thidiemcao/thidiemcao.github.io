@@ -179,9 +179,13 @@ font-size:20px;
 Luyện đề mọi lúc • Chấm điểm tự động • Thống kê kết quả
 </p>
 
-<a class="button" href="login.html">
+<div id="heroAction">
+
+<a class="button" id="loginBtn" href="login.html">
 Đăng nhập
 </a>
+
+</div>
 
 </section>
 
@@ -200,7 +204,6 @@ Luyện đề mọi lúc • Chấm điểm tự động • Thống kê kết q
 <button onclick="vaoThi('thpt.html')">
 Làm bài
 </button>
-
 </div>
 
 <div class="card">
@@ -260,50 +263,37 @@ Làm bài
 
 const ten = localStorage.getItem("studentName");
 
-if(ten){
+if (ten) {
 
-document.getElementById("userBox").innerHTML=`
-Xin chào <b>${ten}</b> 👋
-&nbsp;&nbsp;
-<button onclick="logout()"
-style="
-padding:6px 12px;
-border:none;
-border-radius:6px;
-cursor:pointer;
-">
-Đăng xuất
-</button>
-`;
+    document.getElementById("userBox").innerHTML = `
+    Xin chào <b>${ten}</b> 👋
+    <button onclick="logout()"
+    style="margin-left:15px;padding:6px 12px;border:none;border-radius:6px;cursor:pointer;">
+    Đăng xuất
+    </button>
+    `;
 
+document.getElementById("heroAction").innerHTML = `
+<h3 style="color:#0057ff;">👋 Xin chào ${ten}</h3>
+<p>Chúc em có một buổi thi thử như thi thật hiệu quả!</p>
+`;}
+
+function vaoThi(link){
+
+    if(!localStorage.getItem("studentName")){
+        alert("Vui lòng đăng nhập trước.");
+        location.href="login.html";
+        return;
+    }
+
+    location.href = link;
 }
 
 function logout(){
 
-localStorage.removeItem("studentName");
-localStorage.removeItem("studentPhone");
-
-location.reload();
+    localStorage.clear();
+    location.reload();
 
 }
 
 </script>
-  function vaoThi(trang){
-
-let sdt=localStorage.getItem("studentPhone");
-
-if(!sdt){
-
-alert("Bạn cần đăng nhập trước.");
-
-location.href="login.html";
-
-return;
-
-}
-
-location.href=trang;
-
-}
-</body>
-</html>
