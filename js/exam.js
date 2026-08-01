@@ -125,3 +125,4 @@ document.getElementById("submitBtn").onclick=function(){
 }
 
 loadQuestion(0);
+createQuestionGrid();
