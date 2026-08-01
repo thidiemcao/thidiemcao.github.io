@@ -2,101 +2,94 @@
 <html lang="vi">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>Đăng nhập</title>
 
-<link rel="stylesheet" href="css/style.css">
-
 <style>
-.login-box{
-    max-width:500px;
-    margin:60px auto;
-    background:#fff;
-    padding:30px;
-    border-radius:15px;
-    box-shadow:0 5px 15px rgba(0,0,0,.1);
+body{
+margin:0;
+font-family:Arial,sans-serif;
+background:#f5f7fb;
+display:flex;
+justify-content:center;
+align-items:center;
+height:100vh;
 }
 
-.login-box h1{
-    text-align:center;
-    color:#0057ff;
+.box{
+background:#fff;
+padding:40px;
+width:360px;
+border-radius:15px;
+box-shadow:0 5px 15px rgba(0,0,0,.1);
 }
 
-.login-box input{
-    width:100%;
-    padding:15px;
-    margin-top:15px;
-    border:1px solid #ccc;
-    border-radius:10px;
-    font-size:18px;
-    box-sizing:border-box;
+h2{
+text-align:center;
+margin-bottom:25px;
 }
 
-.login-box button{
-    width:100%;
-    margin-top:20px;
-    padding:15px;
-    background:#0057ff;
-    color:white;
-    border:none;
-    border-radius:10px;
-    font-size:20px;
-    cursor:pointer;
+input{
+width:100%;
+padding:12px;
+margin:10px 0;
+border:1px solid #ccc;
+border-radius:8px;
+font-size:16px;
+box-sizing:border-box;
+}
+
+button{
+width:100%;
+padding:12px;
+background:#0057ff;
+color:#fff;
+border:none;
+border-radius:8px;
+font-size:18px;
+cursor:pointer;
+}
+
+button:hover{
+background:#0044cc;
 }
 </style>
-
 </head>
 
 <body>
 
-<div class="login-box">
+<div class="box">
 
-<h1>🎓 Thi ĐIỂM CAO</h1>
+<h2>Đăng nhập</h2>
 
-<input
-id="studentName"
-type="text"
-placeholder="Họ và tên">
+<input type="text" id="name" placeholder="Họ và tên">
 
-<input
-id="studentPhone"
-type="tel"
-placeholder="Số điện thoại">
+<input type="tel" id="phone" placeholder="Số điện thoại">
 
-<button onclick="startExam()">
-
-BẮT ĐẦU THI
-
-</button>
+<button onclick="login()">Tiếp tục</button>
 
 </div>
 
 <script>
 
-function startExam(){
+function login(){
 
-let name=document.getElementById("studentName").value.trim();
-
-let phone=document.getElementById("studentPhone").value.trim();
+let name=document.getElementById("name").value.trim();
+let phone=document.getElementById("phone").value.trim();
 
 if(name==""||phone==""){
-
-alert("Vui lòng nhập đầy đủ.");
-
+alert("Vui lòng nhập đầy đủ thông tin.");
 return;
-
 }
 
 localStorage.setItem("studentName",name);
-
 localStorage.setItem("studentPhone",phone);
 
-location.href="exam.html";
+window.location.href="index.html";
 
 }
 
 </script>
 
 </body>
-
 </html>
