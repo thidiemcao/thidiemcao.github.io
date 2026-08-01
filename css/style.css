@@ -34,6 +34,8 @@ body{
     display:flex;
     gap:20px;
     padding:25px;
+    align-items:flex-start;
+    overflow-x:auto;
 }
 
 .left{
