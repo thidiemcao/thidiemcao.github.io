@@ -164,6 +164,7 @@ import {
 getFirestore,
 collection,
 getDocs,
+getDoc,
 deleteDoc,
 doc
 } from "https://www.gstatic.com/firebasejs/12.17.0/firebase-firestore.js";
@@ -218,6 +219,10 @@ html+=`
 ✏️
 </button>
 
+<button onclick="viewQuestion('${item.id}')">
+👁️
+</button>
+
 <button onclick="removeQuestion('${item.id}')">
 🗑️
 </button>
@@ -238,7 +243,53 @@ window.editQuestion=function(id){
 location.href="edit-question.html?id="+id;
 
 }
+window.viewQuestion = async function(id){
 
+const snap = await getDoc(doc(db,"questions",id));
+
+const q = snap.data();
+
+document.getElementById("popup").style.display = "block";
+
+document.getElementById("popupContent").innerHTML = `
+
+<p><b>Kỳ thi:</b> ${q.exam}</p>
+
+<p><b>Ngân hàng:</b> ${q.bank}</p>
+
+<p><b>Chuyên đề:</b> ${q.chapter}</p>
+
+<hr>
+
+${q.question}
+
+<hr>
+
+<p><b>A.</b> ${q.A}</p>
+
+<p><b>B.</b> ${q.B}</p>
+
+<p><b>C.</b> ${q.C}</p>
+
+<p><b>D.</b> ${q.D}</p>
+
+<hr>
+
+<p><b>Đáp án đúng:</b> ${q.answer}</p>
+
+<hr>
+
+${q.solution}
+
+`;
+
+}
+
+window.closePopup=function(){
+
+document.getElementById("popup").style.display="none";
+
+}
 window.removeQuestion=async function(id){
 
 if(!confirm("Xóa câu hỏi này?")) return;
@@ -252,5 +303,39 @@ loadQuestions();
 }
 
 </script>
+  <div id="popup" style="
+display:none;
+position:fixed;
+left:0;
+top:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,.5);
+">
+
+<div style="
+background:white;
+width:90%;
+max-width:900px;
+margin:40px auto;
+padding:25px;
+border-radius:12px;
+max-height:90%;
+overflow:auto;
+">
+
+<h2>📖 Chi tiết câu hỏi</h2>
+
+<div id="popupContent"></div>
+
+<br>
+
+<button onclick="closePopup()">
+Đóng
+</button>
+
+</div>
+
+</div>
 </body>
 </html>
