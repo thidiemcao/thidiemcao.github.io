@@ -79,8 +79,7 @@ async function loadGoal(){
 
     try{
 
-        const ref=doc(db,"goals",studentPhone);
-
+        const ref = doc(db, "hoc_sinh", studentPhone);
         const snap=await getDoc(ref);
 
         if(!snap.exists()){
