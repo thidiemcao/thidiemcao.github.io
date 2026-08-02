@@ -1,0 +1,634 @@
+/* ==========================================
+   THI ĐIỂM CAO - EXAM.CSS
+   PHẦN 1 - RESET + HEADER + LAYOUT
+========================================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:Arial,Helvetica,sans-serif;
+    background:#f4f7fc;
+    color:#222;
+}
+
+/* ================= HEADER ================= */
+
+.topbar{
+
+    position:sticky;
+    top:0;
+
+    z-index:1000;
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    gap:20px;
+
+    padding:18px 30px;
+
+    background:linear-gradient(90deg,#0057ff,#2d8cff);
+
+    color:white;
+
+    box-shadow:0 3px 12px rgba(0,0,0,.15);
+
+}
+
+.logo{
+
+    font-size:24px;
+    font-weight:bold;
+
+}
+
+.logo span{
+
+    margin-left:8px;
+
+}
+
+.timer{
+
+    background:white;
+
+    color:#e53935;
+
+    padding:10px 22px;
+
+    border-radius:40px;
+
+    font-size:28px;
+
+    font-weight:bold;
+
+    min-width:150px;
+
+    text-align:center;
+
+}
+
+.progress-box{
+
+    background:rgba(255,255,255,.18);
+
+    padding:12px 18px;
+
+    border-radius:12px;
+
+    font-size:17px;
+
+}
+
+/* ================= LAYOUT ================= */
+
+.container{
+
+    max-width:1500px;
+
+    margin:30px auto;
+
+    padding:0 20px;
+
+    display:grid;
+
+    grid-template-columns:3fr 1fr;
+
+    gap:25px;
+
+}
+/* ==========================================
+   PHẦN 2 - KHUNG CÂU HỎI
+========================================== */
+
+.left{
+
+    background:white;
+
+    border-radius:20px;
+
+    padding:35px;
+
+    box-shadow:0 8px 25px rgba(0,0,0,.08);
+
+}
+
+.right{
+
+    background:white;
+
+    border-radius:20px;
+
+    padding:25px;
+
+    box-shadow:0 8px 25px rgba(0,0,0,.08);
+
+    position:sticky;
+
+    top:100px;
+
+    height:fit-content;
+
+}
+
+.right h3{
+
+    text-align:center;
+
+    color:#0057ff;
+
+    margin-bottom:20px;
+
+    font-size:22px;
+
+}
+
+/* ================= CÂU HỎI ================= */
+
+#question-title{
+
+    font-size:34px;
+
+    color:#0057ff;
+
+    margin-bottom:25px;
+
+}
+
+#question-content{
+
+    font-size:23px;
+
+    line-height:1.8;
+
+    margin-bottom:35px;
+
+}
+
+/* ================= ĐÁP ÁN ================= */
+
+.answers{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:16px;
+
+}
+
+.answer{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:15px;
+
+    padding:18px 20px;
+
+    background:#f7f9ff;
+
+    border:2px solid transparent;
+
+    border-radius:14px;
+
+    cursor:pointer;
+
+    transition:.25s;
+
+    font-size:20px;
+
+}
+
+.answer:hover{
+
+    background:#eef4ff;
+
+    border-color:#4c8dff;
+
+    transform:translateX(4px);
+
+}
+
+.answer input{
+
+    width:22px;
+
+    height:22px;
+
+    accent-color:#0057ff;
+
+    cursor:pointer;
+
+}
+
+.answer span{
+
+    flex:1;
+
+}
+/* ==========================================
+   PHẦN 3 - NÚT & DANH SÁCH CÂU
+========================================== */
+
+/* ===== NÚT ===== */
+
+.buttons{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    gap:15px;
+
+    margin-top:35px;
+
+    flex-wrap:wrap;
+
+}
+
+.buttons button{
+
+    flex:1;
+
+    min-width:170px;
+
+    padding:15px;
+
+    border:none;
+
+    border-radius:12px;
+
+    font-size:18px;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+    transition:.25s;
+
+}
+
+#prevBtn{
+
+    background:#eceff1;
+
+    color:#333;
+
+}
+
+#prevBtn:hover{
+
+    background:#d9dee2;
+
+}
+
+#nextBtn{
+
+    background:#0057ff;
+
+    color:white;
+
+}
+
+#nextBtn:hover{
+
+    background:#0044cc;
+
+}
+
+#submitBtn{
+
+    background:#00c853;
+
+    color:white;
+
+}
+
+#submitBtn:hover{
+
+    background:#00a843;
+
+}
+
+/* ===== LƯỚI CÂU ===== */
+
+#question-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(5,1fr);
+
+    gap:10px;
+
+}
+
+.question-number{
+
+    width:48px;
+
+    height:48px;
+
+    border-radius:12px;
+
+    background:#f2f4f8;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    cursor:pointer;
+
+    font-weight:bold;
+
+    transition:.25s;
+
+    border:2px solid transparent;
+
+}
+
+.question-number:hover{
+
+    background:#dbe9ff;
+
+}
+
+/* Chưa làm */
+
+.question-number.unanswered{
+
+    background:#f2f4f8;
+
+    color:#444;
+
+}
+
+/* Đã làm */
+
+.question-number.answered{
+
+    background:#4caf50;
+
+    color:white;
+
+}
+
+/* Câu hiện tại */
+
+.question-number.current{
+
+    background:#ff9800;
+
+    color:white;
+
+    border-color:#ff6d00;
+
+}
+/* ==========================================
+   PHẦN 4 - RESPONSIVE + HIỆU ỨNG
+========================================== */
+
+/* Hiệu ứng xuất hiện */
+
+.left,
+.right{
+
+    animation:fadeIn .4s ease;
+
+}
+
+@keyframes fadeIn{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(15px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+
+    }
+
+}
+
+/* Thanh cuộn đẹp */
+
+::-webkit-scrollbar{
+
+    width:10px;
+
+}
+
+::-webkit-scrollbar-track{
+
+    background:#eef2f8;
+
+}
+
+::-webkit-scrollbar-thumb{
+
+    background:#8bb5ff;
+
+    border-radius:20px;
+
+}
+
+::-webkit-scrollbar-thumb:hover{
+
+    background:#4f8cff;
+
+}
+
+/* ================= TABLET ================= */
+
+@media(max-width:1024px){
+
+.topbar{
+
+    flex-direction:column;
+
+    gap:15px;
+
+    text-align:center;
+
+}
+
+.container{
+
+    grid-template-columns:1fr;
+
+}
+
+.right{
+
+    position:static;
+
+}
+
+#question-grid{
+
+    grid-template-columns:repeat(8,1fr);
+
+}
+
+}
+
+/* ================= ĐIỆN THOẠI ================= */
+
+@media(max-width:768px){
+
+body{
+
+    font-size:16px;
+
+}
+
+.topbar{
+
+    padding:18px;
+
+}
+
+.logo{
+
+    font-size:20px;
+
+}
+
+.logo span{
+
+    display:block;
+
+    margin-top:8px;
+
+}
+
+.timer{
+
+    font-size:24px;
+
+    min-width:auto;
+
+}
+
+.progress-box{
+
+    width:100%;
+
+    text-align:center;
+
+}
+
+.container{
+
+    padding:15px;
+
+}
+
+.left{
+
+    padding:22px;
+
+}
+
+.right{
+
+    padding:20px;
+
+}
+
+#question-title{
+
+    font-size:28px;
+
+}
+
+#question-content{
+
+    font-size:20px;
+
+}
+
+.answer{
+
+    font-size:18px;
+
+    padding:16px;
+
+}
+
+.buttons{
+
+    flex-direction:column;
+
+}
+
+.buttons button{
+
+    width:100%;
+
+}
+
+#question-grid{
+
+    grid-template-columns:repeat(5,1fr);
+
+}
+
+.question-number{
+
+    width:45px;
+
+    height:45px;
+
+}
+
+}
+
+/* ================= ĐIỆN THOẠI NHỎ ================= */
+
+@media(max-width:480px){
+
+#question-grid{
+
+    grid-template-columns:repeat(4,1fr);
+
+}
+
+.question-number{
+
+    width:42px;
+
+    height:42px;
+
+    font-size:15px;
+
+}
+
+#question-content{
+
+    font-size:18px;
+
+}
+
+.answer{
+
+    font-size:17px;
+
+}
+
+}
