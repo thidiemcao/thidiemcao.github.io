@@ -156,6 +156,101 @@ Tìm kiếm
 </table>
 
 </div>
+<script type="module">
 
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.17.0/firebase-app.js";
+
+import {
+getFirestore,
+collection,
+getDocs,
+deleteDoc,
+doc
+} from "https://www.gstatic.com/firebasejs/12.17.0/firebase-firestore.js";
+
+const firebaseConfig = {
+
+apiKey: "AIzaSyAn5qW3LKUyEAgGBd0Yb8T4_ZoBujQKFbY",
+
+authDomain: "thidiemcao-4097d.firebaseapp.com",
+
+projectId: "thidiemcao-4097d",
+
+storageBucket: "thidiemcao-4097d.firebasestorage.app",
+
+messagingSenderId: "333180855649",
+
+appId: "1:333180855649:web:e46ce1e15a715b3f0c5120"
+
+};
+
+const app = initializeApp(firebaseConfig);
+
+const db = getFirestore(app);
+
+loadQuestions();
+
+async function loadQuestions(){
+
+const snapshot = await getDocs(collection(db,"questions"));
+
+let html="";
+
+let stt=1;
+
+snapshot.forEach((item)=>{
+
+const q=item.data();
+
+html+=`
+<tr>
+
+<td>${stt++}</td>
+
+<td>${q.question.replace(/<[^>]+>/g,"").substring(0,80)}...</td>
+<td>${q.chapter}</td>
+
+<td>${q.level}</td>
+
+<td class="action">
+
+<button onclick="editQuestion('${item.id}')">
+✏️
+</button>
+
+<button onclick="removeQuestion('${item.id}')">
+🗑️
+</button>
+
+</td>
+
+</tr>
+`;
+
+});
+
+document.getElementById("questionTable").innerHTML=html;
+
+}
+
+window.editQuestion=function(id){
+
+location.href="edit-question.html?id="+id;
+
+}
+
+window.removeQuestion=async function(id){
+
+if(!confirm("Xóa câu hỏi này?")) return;
+
+await deleteDoc(doc(db,"questions",id));
+
+alert("Đã xóa!");
+
+loadQuestions();
+
+}
+
+</script>
 </body>
 </html>
