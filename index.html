@@ -180,7 +180,55 @@ Luyện đề mọi lúc • Chấm điểm tự động • Thống kê kết q
 </p>
 
 <div id="heroAction">
+<div id="goalCard" style="display:none;margin:40px auto;max-width:700px;">
 
+<div style="
+background:white;
+padding:25px;
+border-radius:20px;
+box-shadow:0 8px 25px rgba(0,0,0,.1);
+text-align:left;
+">
+
+<h2>🎯 Hành trình chinh phục mục tiêu</h2>
+
+<p id="goalName"
+style="margin-top:15px;font-size:22px;font-weight:bold;">
+</p>
+
+<div style="
+margin-top:20px;
+background:#eee;
+height:22px;
+border-radius:30px;
+overflow:hidden;
+">
+
+<div id="goalBar"
+style="
+width:0%;
+height:100%;
+background:#00b894;
+transition:1s;
+">
+</div>
+
+</div>
+
+<p id="goalPercent"
+style="margin-top:15px;font-size:18px;">
+0%
+</p>
+
+<button
+id="goalBtn"
+style="margin-top:20px;">
+Thiết lập mục tiêu
+</button>
+
+</div>
+
+</div>
 <a class="button" id="loginBtn" href="login.html">
 Đăng nhập
 </a>
@@ -288,7 +336,52 @@ function vaoThi(link){
 
     location.href = link;
 }
+loadGoal();
 
+function loadGoal(){
+
+const goal=localStorage.getItem("goal");
+
+document.getElementById("goalCard").style.display="block";
+
+if(!goal){
+
+document.getElementById("goalName").innerHTML=
+"Hiện em chưa thiết lập mục tiêu.";
+
+document.getElementById("goalBtn").innerHTML=
+"✨ Thiết lập ngay";
+
+document.getElementById("goalBtn").onclick=function(){
+
+location.href="goal.html";
+
+};
+
+return;
+
+}
+
+const percent=localStorage.getItem("goalPercent")||0;
+
+document.getElementById("goalName").innerHTML=goal;
+
+document.getElementById("goalPercent").innerHTML=
+"Đã hoàn thành "+percent+"%";
+
+document.getElementById("goalBar").style.width=
+percent+"%";
+
+document.getElementById("goalBtn").innerHTML=
+"Xem chi tiết";
+
+document.getElementById("goalBtn").onclick=function(){
+
+location.href="goal.html";
+
+};
+
+}
 function logout(){
 
     localStorage.clear();
