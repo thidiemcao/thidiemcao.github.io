@@ -8,14 +8,9 @@
 
 <style>
 
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:Arial,sans-serif;
-}
-
 body{
+margin:0;
+font-family:Arial;
 background:#f5f7fb;
 }
 
@@ -26,58 +21,69 @@ padding:25px;
 text-align:center;
 }
 
+header h1{
+margin:0;
+}
+
 .container{
-max-width:1100px;
-margin:auto;
-padding:40px 20px;
+max-width:1000px;
+margin:40px auto;
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+gap:30px;
+padding:20px;
 }
 
 .card{
+
 background:white;
-border-radius:18px;
 padding:30px;
-margin-bottom:30px;
-box-shadow:0 5px 15px rgba(0,0,0,.08);
-display:flex;
-justify-content:space-between;
-align-items:center;
-flex-wrap:wrap;
+border-radius:15px;
+box-shadow:0 5px 15px rgba(0,0,0,.1);
+text-align:center;
+
 }
 
 .card h2{
-font-size:30px;
-margin-bottom:10px;
+
+font-size:28px;
+margin-bottom:20px;
+
 }
 
 .card p{
+
 font-size:18px;
 color:#666;
+margin-bottom:25px;
+
 }
 
 button{
+
 background:#0057ff;
 color:white;
 border:none;
-padding:15px 35px;
-border-radius:10px;
+padding:14px 28px;
+border-radius:8px;
 font-size:18px;
 cursor:pointer;
+
 }
 
 button:hover{
+
 background:#0044cc;
+
 }
 
 .back{
-margin-top:40px;
-text-align:center;
-}
 
-.back a{
-text-decoration:none;
-font-size:20px;
-color:#0057ff;
-font-weight:bold;
+display:block;
+text-align:center;
+margin:30px;
+font-size:18px;
+
 }
 
 </style>
@@ -88,9 +94,9 @@ font-weight:bold;
 
 <header>
 
-<h1>🎓 THPT Quốc gia</h1>
+<h1>🎓 Luyện thi THPT</h1>
 
-<p>Chọn nội dung muốn luyện tập</p>
+<p>Chọn ngân hàng đề muốn luyện</p>
 
 </header>
 
@@ -98,55 +104,23 @@ font-weight:bold;
 
 <div class="card">
 
-<div>
+<h2>📕 1000 câu SAI NGU</h2>
 
-<h2>📕 1000 Câu Sai Ngu</h2>
+<p>Ôn tập các lỗi học sinh thường mắc phải.</p>
 
-<p>
-Luyện các câu hỏi học sinh thường sai theo từng chuyên đề.
-</p>
-
-</div>
-
-<button onclick="location.href='saingu.html'">
+<button onclick="alert('Đang xây dựng')">
 Vào học
 </button>
 
 </div>
 
-
 <div class="card">
 
-<div>
+<h2>📝 500 đề thi thử</h2>
 
-<h2>📗 500 Đề thi thử mới nhất</h2>
+<p>Đề mới nhất từ các Sở GD&ĐT và trường chuyên.</p>
 
-<p>
-Tổng hợp đề từ Sở GD&ĐT và các trường THPT uy tín.
-</p>
-
-</div>
-
-<button onclick="location.href='dethithu.html'">
-Làm đề
-</button>
-
-</div>
-
-
-<div class="card">
-
-<div>
-
-<h2>📘 250 Đề phát triển chuẩn BGD</h2>
-
-<p>
-Hệ thống đề bám sát cấu trúc mới nhất của Bộ GD&ĐT.
-</p>
-
-</div>
-
-<button onclick="location.href='phattrien.html'">
+<button onclick="alert('Đang xây dựng')">
 Làm đề
 </button>
 
@@ -154,31 +128,21 @@ Làm đề
 
 <div class="card">
 
-<div>
+<h2>⭐ 250 đề chuẩn BGD</h2>
 
-<h2>🏆 Phòng thi thử</h2>
+<p>Đề phát triển theo cấu trúc mới của Bộ.</p>
 
-<p>
-Thi như thật • 90 phút • Chấm điểm tự động • Xếp hạng.
-</p>
-
-</div>
-
-<button onclick="location.href='phongthi.html'">
-Vào thi
+<button onclick="alert('Đang xây dựng')">
+Làm đề
 </button>
 
 </div>
 
-<div class="back">
+</div>
 
-<a href="index.html">
-⬅ Quay về Trang chủ
+<a class="back" href="index.html">
+⬅ Quay về trang chủ
 </a>
-
-</div>
-
-</div>
 
 </body>
 </html>
