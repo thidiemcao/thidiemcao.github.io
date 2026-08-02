@@ -1,146 +1,149 @@
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Thêm câu hỏi</title>
 
 <style>
 
-body{
-font-family:Arial,sans-serif;
-background:#f5f7fb;
+*{
 margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,sans-serif;
+}
+
+body{
+background:#f5f7fb;
 }
 
 header{
+
 background:#0057ff;
 color:white;
 padding:20px;
 text-align:center;
+
 }
 
 .container{
-max-width:900px;
+
+max-width:1000px;
 margin:30px auto;
 background:white;
 padding:30px;
 border-radius:15px;
 box-shadow:0 5px 15px rgba(0,0,0,.1);
+
 }
 
-input, textarea, select{
+h2{
+
+margin-bottom:20px;
+color:#0057ff;
+
+}
+
+label{
+
+display:block;
+margin-top:20px;
+margin-bottom:8px;
+font-weight:bold;
+
+}
+
+input,
+select,
+textarea{
+
 width:100%;
 padding:12px;
-margin:10px 0;
 font-size:16px;
 border:1px solid #ccc;
 border-radius:8px;
-box-sizing:border-box;
+
+}
+
+textarea{
+
+min-height:120px;
+
+}
+
+.row{
+
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:20px;
+
 }
 
 button{
+
+margin-top:30px;
 background:#0057ff;
 color:white;
-padding:12px 25px;
-border:none;
-border-radius:8px;
+padding:15px;
 font-size:18px;
+border:none;
+border-radius:10px;
 cursor:pointer;
+
 }
 
 button:hover{
+
 background:#0044cc;
+
+}
+
+.back{
+
+display:inline-block;
+margin-bottom:20px;
+text-decoration:none;
+color:#0057ff;
+font-weight:bold;
+
+}
+
+.back:hover{
+
+text-decoration:underline;
+
 }
 
 </style>
+
 </head>
-<script type="module">
 
-import { initializeApp } from "https://www.gstatic.com/firebasejs/12.17.0/firebase-app.js";
-
-import {
-getFirestore,
-collection,
-addDoc
-}
-from "https://www.gstatic.com/firebasejs/12.17.0/firebase-firestore.js";
-
-const firebaseConfig = {
-
-apiKey: "AIzaSyAn5qW3LKUyEAgGBd0Yb8T4_ZoBujQKFbY",
-
-authDomain: "thidiemcao-4097d.firebaseapp.com",
-
-projectId: "thidiemcao-4097d",
-
-storageBucket: "thidiemcao-4097d.firebasestorage.app",
-
-messagingSenderId: "333180855649",
-
-appId: "1:333180855649:web:e46ce1e15a715b3f0c5120"
-
-};
-
-const app = initializeApp(firebaseConfig);
-
-const db = getFirestore(app);
-
-window.db = db;
-window.addDoc = addDoc;
-window.collection = collection;
-
-</script>
-  <script type="module">
-
-document.getElementById("saveBtn").onclick = async function(){
-
-const data = {
-
-exam: document.getElementById("exam").value,
-
-bank: document.getElementById("bank").value,
-
-chapter: document.getElementById("chapter").value,
-
-lesson: document.getElementById("lesson").value,
-
-level: document.getElementById("level").value,
-
-question: document.getElementById("question").value,
-
-A: document.getElementById("A").value,
-
-B: document.getElementById("B").value,
-
-C: document.getElementById("C").value,
-
-D: document.getElementById("D").value,
-
-answer: document.getElementById("answer").value,
-
-solution: document.getElementById("solution").value,
-
-createdAt: new Date()
-
-};
-
-await addDoc(collection(db,"questions"),data);
-
-alert("✅ Đã lưu câu hỏi!");
-
-location.reload();
-
-}
-
-</script>
 <body>
 
 <header>
-<h1>➕ Thêm câu hỏi</h1>
+
+<h1>➕ Thêm câu hỏi mới</h1>
+
+<p>Ngân hàng đề thi Thầy Hoàng MpC</p>
+
 </header>
 
 <div class="container">
+
+<a class="back" href="admin.html">
+← Quay về trang quản trị
+</a>
+
+<h2>Thông tin câu hỏi</h2>
+
+<div class="row">
+
+<div>
+
 <label>Kỳ thi</label>
 
 <select id="exam">
@@ -155,8 +158,11 @@ location.reload();
 
 </select>
 
+</div>
 
-<label>Ngân hàng câu hỏi</label>
+<div>
+
+<label>Ngân hàng</label>
 
 <select id="bank">
 
@@ -168,6 +174,13 @@ location.reload();
 
 </select>
 
+</div>
+
+</div>
+
+<div class="row">
+
+<div>
 
 <label>Chuyên đề</label>
 
@@ -187,6 +200,9 @@ location.reload();
 
 </select>
 
+</div>
+
+<div>
 
 <label>Bài học</label>
 
@@ -206,6 +222,13 @@ location.reload();
 
 </select>
 
+</div>
+
+</div>
+
+<div class="row">
+
+<div>
 
 <label>Mức độ</label>
 
@@ -218,27 +241,226 @@ location.reload();
 <option>🔴 Khó</option>
 
 </select>
-<textarea id="question" rows="4" placeholder="Nhập câu hỏi"></textarea>
 
-<input id="A" placeholder="Đáp án A">
-<input id="B" placeholder="Đáp án B">
-<input id="C" placeholder="Đáp án C">
-<input id="D" placeholder="Đáp án D">
+</div>
+
+<div>
+
+<label>Đáp án đúng</label>
 
 <select id="answer">
+
 <option>A</option>
+
 <option>B</option>
+
 <option>C</option>
+
 <option>D</option>
+
 </select>
 
-<textarea id="solution" rows="4" placeholder="Lời giải"></textarea>
+</div>
+
+</div>
+
+<label>Câu hỏi</label>
+
+<textarea id="question"></textarea>
+
+<label>Đáp án A</label>
+
+<input id="A">
+
+<label>Đáp án B</label>
+
+<input id="B">
+
+<label>Đáp án C</label>
+
+<input id="C">
+
+<label>Đáp án D</label>
+
+<input id="D">
+
+<label>Lời giải</label>
+
+<textarea id="solution"></textarea>
 
 <button id="saveBtn">
-Lưu câu hỏi
+
+💾 Lưu câu hỏi
+
 </button>
 
 </div>
+</div>
+
+<!-- CKEditor -->
+<script src="https://cdn.ckeditor.com/ckeditor5/41.4.2/classic/ckeditor.js"></script>
+
+<script type="module">
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.17.0/firebase-app.js";
+
+import {
+getFirestore,
+collection,
+addDoc
+}
+from "https://www.gstatic.com/firebasejs/12.17.0/firebase-firestore.js";
+
+/* Firebase */
+
+const firebaseConfig={
+
+apiKey:"AIzaSyAn5qW3LKUyEAgGBd0Yb8T4_ZoBujQKFbY",
+
+authDomain:"thidiemcao-4097d.firebaseapp.com",
+
+projectId:"thidiemcao-4097d",
+
+storageBucket:"thidiemcao-4097d.firebasestorage.app",
+
+messagingSenderId:"333180855649",
+
+appId:"1:333180855649:web:e46ce1e15a715b3f0c5120"
+
+};
+
+const app=initializeApp(firebaseConfig);
+
+const db=getFirestore(app);
+
+/* CKEditor */
+
+let editorQuestion;
+
+let editorSolution;
+
+ClassicEditor
+.create(document.querySelector("#question"))
+.then(editor=>{
+
+editorQuestion=editor;
+
+})
+.catch(error=>{
+
+console.error(error);
+
+});
+
+ClassicEditor
+.create(document.querySelector("#solution"))
+.then(editor=>{
+
+editorSolution=editor;
+
+})
+.catch(error=>{
+
+console.error(error);
+
+});
+  /* ===========================
+   LƯU CÂU HỎI LÊN FIRESTORE
+=========================== */
+
+document.getElementById("saveBtn").onclick = async function(){
+
+const exam = document.getElementById("exam").value;
+const bank = document.getElementById("bank").value;
+const chapter = document.getElementById("chapter").value;
+const lesson = document.getElementById("lesson").value;
+const level = document.getElementById("level").value;
+
+const question = editorQuestion.getData();
+
+const A = document.getElementById("A").value.trim();
+const B = document.getElementById("B").value.trim();
+const C = document.getElementById("C").value.trim();
+const D = document.getElementById("D").value.trim();
+
+const answer = document.getElementById("answer").value;
+
+const solution = editorSolution.getData();
+
+/* Kiểm tra dữ liệu */
+
+if(question==""){
+
+alert("Vui lòng nhập câu hỏi.");
+
+return;
+
+}
+
+if(A==""||B==""||C==""||D==""){
+
+alert("Vui lòng nhập đủ 4 đáp án.");
+
+return;
+
+}
+
+try{
+
+await addDoc(collection(db,"questions"),{
+
+exam,
+
+bank,
+
+chapter,
+
+lesson,
+
+level,
+
+question,
+
+A,
+
+B,
+
+C,
+
+D,
+
+answer,
+
+solution,
+
+createdAt:new Date()
+
+});
+
+alert("✅ Đã lưu câu hỏi thành công!");
+
+editorQuestion.setData("");
+
+editorSolution.setData("");
+
+document.getElementById("A").value="";
+document.getElementById("B").value="";
+document.getElementById("C").value="";
+document.getElementById("D").value="";
+
+document.getElementById("answer").selectedIndex=0;
+
+}catch(error){
+
+console.error(error);
+
+alert("❌ Lỗi khi lưu dữ liệu!");
+
+}
+
+}
+
+</script>
 
 </body>
 </html>
