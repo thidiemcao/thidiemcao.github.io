@@ -113,7 +113,55 @@ document.getElementById("submitBtn").onclick=function(){
             score++;
 
     }
+const today=new Date().toLocaleDateString();
 
+const last=localStorage.getItem("lastStudy");
+
+let streak=parseInt(localStorage.getItem("streak")||0);
+
+if(last!=today){
+
+streak++;
+
+localStorage.setItem("streak",streak);
+
+localStorage.setItem("lastStudy",today);
+
+}
+    let progress=parseInt(localStorage.getItem("goalPercent")||0);
+
+progress+=2;
+
+if(progress>100){
+
+progress=100;
+
+}
+
+localStorage.setItem("goalPercent",progress);
+    if(progress>=25){
+
+localStorage.setItem("badge","🥉 Đồng");
+
+}
+
+if(progress>=50){
+
+localStorage.setItem("badge","🥈 Bạc");
+
+}
+
+if(progress>=75){
+
+localStorage.setItem("badge","🥇 Vàng");
+
+}
+
+if(progress>=100){
+
+localStorage.setItem("badge","🏆 Chinh phục mục tiêu");
+
+}
     alert(
         "Bạn đúng "
         +score+
