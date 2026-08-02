@@ -184,22 +184,25 @@ Luyện đề mọi lúc • Chấm điểm tự động • Thống kê kết q
 
 <div style="
 background:white;
-padding:25px;
+padding:30px;
 border-radius:20px;
 box-shadow:0 8px 25px rgba(0,0,0,.1);
-text-align:left;
 ">
 
 <h2>🎯 Hành trình chinh phục mục tiêu</h2>
 
-<p id="goalName"
-style="margin-top:15px;font-size:22px;font-weight:bold;">
+<h3 id="goalName"
+style="margin-top:20px;color:#0057ff;">
+</h3>
+
+<p id="goalSchool"
+style="font-size:18px;color:#666;">
 </p>
 
 <div style="
-margin-top:20px;
+margin-top:25px;
 background:#eee;
-height:22px;
+height:24px;
 border-radius:30px;
 overflow:hidden;
 ">
@@ -208,13 +211,47 @@ overflow:hidden;
 style="
 width:0%;
 height:100%;
-background:#00b894;
+background:linear-gradient(90deg,#00c853,#64dd17);
 transition:1s;
 ">
 </div>
 
 </div>
 
+<h2 id="goalPercent"
+style="margin-top:15px;">
+0%
+</h2>
+
+<hr style="margin:25px 0;">
+
+<div id="todayMission"></div>
+
+<hr style="margin:25px 0;">
+
+<div id="streak"></div>
+
+<hr style="margin:25px 0;">
+
+<div id="nextReward"></div>
+
+<button
+id="goalBtn"
+style="
+margin-top:25px;
+padding:12px 25px;
+background:#0057ff;
+color:white;
+border:none;
+border-radius:8px;
+cursor:pointer;
+">
+Chi tiết hành trình
+</button>
+
+</div>
+
+</div>
 <p id="goalPercent"
 style="margin-top:15px;font-size:18px;">
 0%
@@ -347,7 +384,20 @@ document.getElementById("goalCard").style.display="block";
 if(!goal){
 
 document.getElementById("goalName").innerHTML=
-"Hiện em chưa thiết lập mục tiêu.";
+"🎯 Em chưa thiết lập mục tiêu.";
+
+document.getElementById("goalSchool").innerHTML=
+"Hãy tạo mục tiêu để bắt đầu hành trình.";
+
+document.getElementById("goalPercent").innerHTML="0%";
+
+document.getElementById("goalBar").style.width="0%";
+
+document.getElementById("todayMission").innerHTML="";
+
+document.getElementById("streak").innerHTML="";
+
+document.getElementById("nextReward").innerHTML="";
 
 document.getElementById("goalBtn").innerHTML=
 "✨ Thiết lập ngay";
@@ -362,18 +412,52 @@ return;
 
 }
 
-const percent=localStorage.getItem("goalPercent")||0;
+const percent=parseInt(localStorage.getItem("goalPercent")||0);
 
-document.getElementById("goalName").innerHTML=goal;
+const streak=localStorage.getItem("streak")||0;
+
+document.getElementById("goalName").innerHTML=
+"🏆 "+goal;
+
+document.getElementById("goalSchool").innerHTML=
+"Đích đến của em";
 
 document.getElementById("goalPercent").innerHTML=
-"Đã hoàn thành "+percent+"%";
+percent+"% hoàn thành";
 
 document.getElementById("goalBar").style.width=
 percent+"%";
 
+document.getElementById("todayMission").innerHTML=`
+
+<h3>🔥 Nhiệm vụ hôm nay</h3>
+
+<p>☐ Làm 20 câu hỏi</p>
+
+<p>☐ Hoàn thành 1 đề thi</p>
+
+<p>☐ Xem lại các câu sai</p>
+
+`;
+
+document.getElementById("streak").innerHTML=`
+
+<h3>🔥 Chuỗi học tập</h3>
+
+<p>Đã học liên tiếp <b>${streak}</b> ngày</p>
+
+`;
+
+document.getElementById("nextReward").innerHTML=`
+
+<h3>🎁 Phần thưởng kế tiếp</h3>
+
+<p>Hoàn thành <b>100 câu</b> để nhận huy hiệu 🥉 Đồng.</p>
+
+`;
+
 document.getElementById("goalBtn").innerHTML=
-"Xem chi tiết";
+"⚙️ Chỉnh sửa mục tiêu";
 
 document.getElementById("goalBtn").onclick=function(){
 
@@ -382,11 +466,3 @@ location.href="goal.html";
 };
 
 }
-function logout(){
-
-    localStorage.clear();
-    location.reload();
-
-}
-
-</script>
