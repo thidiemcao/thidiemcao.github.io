@@ -448,11 +448,13 @@ document.getElementById("streak").innerHTML=`
 
 `;
 
+const badge=localStorage.getItem("badge")||"Chưa có";
+
 document.getElementById("nextReward").innerHTML=`
 
-<h3>🎁 Phần thưởng kế tiếp</h3>
+<h3>🏅 Thành tích</h3>
 
-<p>Hoàn thành <b>100 câu</b> để nhận huy hiệu 🥉 Đồng.</p>
+<p>Huy hiệu hiện tại: <b>${badge}</b></p>
 
 `;
 
