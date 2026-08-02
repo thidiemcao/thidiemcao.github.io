@@ -91,6 +91,49 @@ window.addDoc = addDoc;
 window.collection = collection;
 
 </script>
+  <script type="module">
+
+document.getElementById("saveBtn").onclick = async function(){
+
+const data = {
+
+exam: document.getElementById("exam").value,
+
+bank: document.getElementById("bank").value,
+
+chapter: document.getElementById("chapter").value,
+
+lesson: document.getElementById("lesson").value,
+
+level: document.getElementById("level").value,
+
+question: document.getElementById("question").value,
+
+A: document.getElementById("A").value,
+
+B: document.getElementById("B").value,
+
+C: document.getElementById("C").value,
+
+D: document.getElementById("D").value,
+
+answer: document.getElementById("answer").value,
+
+solution: document.getElementById("solution").value,
+
+createdAt: new Date()
+
+};
+
+await addDoc(collection(db,"questions"),data);
+
+alert("✅ Đã lưu câu hỏi!");
+
+location.reload();
+
+}
+
+</script>
 <body>
 
 <header>
@@ -191,7 +234,7 @@ window.collection = collection;
 
 <textarea id="solution" rows="4" placeholder="Lời giải"></textarea>
 
-<button>
+<button id="saveBtn">
 Lưu câu hỏi
 </button>
 
