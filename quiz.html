@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Luyện tập</title>
+
+<style>
+
+body{
+font-family:Arial,sans-serif;
+background:#f5f7fb;
+margin:0;
+}
+
+header{
+background:#0057ff;
+color:white;
+padding:20px;
+text-align:center;
+}
+
+.container{
+max-width:900px;
+margin:40px auto;
+background:white;
+padding:30px;
+border-radius:15px;
+box-shadow:0 5px 15px rgba(0,0,0,.08);
+}
+
+.question{
+font-size:24px;
+margin-bottom:30px;
+}
+
+.answer{
+padding:15px;
+margin:12px 0;
+border:2px solid #ddd;
+border-radius:10px;
+cursor:pointer;
+transition:.2s;
+}
+
+.answer:hover{
+background:#eef4ff;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+<h1 id="title">Luyện tập</h1>
+
+</header>
+
+<div class="container">
+
+<div class="question">
+
+Câu hỏi sẽ xuất hiện ở đây.
+
+</div>
+
+<div class="answer">A.</div>
+<div class="answer">B.</div>
+<div class="answer">C.</div>
+<div class="answer">D.</div>
+
+</div>
+
+<script>
+
+const url=new URLSearchParams(location.search);
+
+const topic=url.get("topic");
+
+const titles={
+
+hamso:"📈 Hàm số 12",
+
+thongke:"📊 Thống kê 12",
+
+tichphan:"∫ Tích phân 12",
+
+oxyz:"📦 Oxyz 12",
+
+xacsuat:"🎲 Xác suất 10-12",
+
+kienthuc:"📚 Kiến thức 10+11"
+
+};
+
+document.getElementById("title").innerHTML=titles[topic]||"Luyện tập";
+
+</script>
+
+</body>
+</html>
