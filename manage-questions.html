@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Quản lý câu hỏi</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,sans-serif;
+}
+
+body{
+background:#f4f6fb;
+}
+
+header{
+background:#0057ff;
+color:white;
+padding:20px;
+text-align:center;
+}
+
+.container{
+max-width:1200px;
+margin:30px auto;
+padding:20px;
+}
+
+.filter{
+background:white;
+padding:20px;
+border-radius:12px;
+box-shadow:0 5px 15px rgba(0,0,0,.08);
+margin-bottom:25px;
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+gap:15px;
+}
+
+select,input{
+padding:12px;
+font-size:16px;
+border:1px solid #ccc;
+border-radius:8px;
+}
+
+button{
+background:#0057ff;
+color:white;
+border:none;
+padding:12px;
+border-radius:8px;
+cursor:pointer;
+font-size:16px;
+}
+
+button:hover{
+background:#0044cc;
+}
+
+table{
+width:100%;
+background:white;
+border-collapse:collapse;
+border-radius:12px;
+overflow:hidden;
+box-shadow:0 5px 15px rgba(0,0,0,.08);
+}
+
+th{
+background:#0057ff;
+color:white;
+padding:15px;
+}
+
+td{
+padding:15px;
+border-bottom:1px solid #eee;
+}
+
+.action button{
+margin-right:5px;
+padding:8px 12px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+<h1>📚 Quản lý câu hỏi</h1>
+
+</header>
+
+<div class="container">
+
+<div class="filter">
+
+<select id="exam">
+<option value="">Tất cả kỳ thi</option>
+<option>THPT</option>
+<option>ĐGNL</option>
+<option>Tuyển sinh 10</option>
+<option>Kiểm tra định kỳ</option>
+</select>
+
+<select id="chapter">
+<option value="">Tất cả chuyên đề</option>
+<option>Hàm số 12</option>
+<option>Tích phân 12</option>
+<option>Oxyz 12</option>
+<option>Thống kê 12</option>
+<option>Xác suất</option>
+</select>
+
+<input id="keyword" placeholder="Tìm kiếm câu hỏi...">
+
+<button id="searchBtn">
+Tìm kiếm
+</button>
+
+</div>
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>STT</th>
+
+<th>Câu hỏi</th>
+
+<th>Chuyên đề</th>
+
+<th>Mức độ</th>
+
+<th>Thao tác</th>
+
+</tr>
+
+</thead>
+
+<tbody id="questionTable">
+
+</tbody>
+
+</table>
+
+</div>
+
+</body>
+</html>
