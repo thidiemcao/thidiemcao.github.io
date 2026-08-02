@@ -225,3 +225,4 @@ localStorage.setItem("badge","🏆 Chinh phục mục tiêu");
 }
 
 loadQuestion(0);
+updateGrid();
