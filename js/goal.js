@@ -96,11 +96,15 @@ async function loadGoal() {
 
     }
 
-    if (data.goal) {
+   if (data.goals) {
 
-        goal.value = data.goal;
+    [...goal.options].forEach(option => {
 
-    }
+        option.selected = data.goals.includes(option.value);
+
+    });
+
+}
 
 }
 
@@ -119,13 +123,15 @@ saveBtn.onclick = async function () {
 
     }
 
-    if (goal.value == "") {
+    const goals = [...goal.selectedOptions].map(option => option.value);
 
-        alert("Hãy chọn mục tiêu.");
+if (goals.length === 0) {
 
-        return;
+    alert("Hãy chọn ít nhất 1 mục tiêu.");
 
-    }
+    return;
+
+}
 
     await setDoc(
 
@@ -135,8 +141,7 @@ saveBtn.onclick = async function () {
 
             grade: grade.value,
 
-            goal: goal.value,
-
+            goals: goals,
             progress: 0,
 
             streak: 0,
