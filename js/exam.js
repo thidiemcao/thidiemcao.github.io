@@ -221,7 +221,6 @@ let percent = Math.round(score / questions.length * 100);
 let comment = "";
 let advice = "";
 let strong = "";
-let weak = "";let strong = "";
 let weak = "";
 if(percent >= 90){
 
