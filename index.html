@@ -1,9 +1,12 @@
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
 
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta name="viewport"
+content="width=device-width,initial-scale=1.0">
 
 <title>Thi ĐIỂM CAO cùng Thầy Hoàng MpC</title>
 
@@ -15,145 +18,20 @@ padding:0;
 box-sizing:border-box;
 font-family:Arial,sans-serif;
 }
-<script type="module">
 
-import { db } from "./js/firebase.js";
-
-import {
-doc,
-getDoc
-}
-from "https://www.gstatic.com/firebasejs/12.17.0/firebase-firestore.js";
-
-// =========================
-// Thông tin học sinh
-// =========================
-
-const studentName = localStorage.getItem("studentName");
-const studentPhone = localStorage.getItem("studentPhone");
-
-const userBox = document.getElementById("userBox");
-const loginBtn = document.getElementById("loginBtn");
-
-if(studentName){
-
-    userBox.innerHTML = `
-    👋 Xin chào <b>${studentName}</b>
-    <br><br>
-    <button onclick="logout()"
-    style="
-    padding:8px 18px;
-    border:none;
-    border-radius:8px;
-    background:#fff;
-    color:#0057ff;
-    cursor:pointer;
-    font-weight:bold;">
-    Đăng xuất
-    </button>
-    `;
-
-    loginBtn.style.display="none";
-
-}
-
-window.logout=function(){
-
-    localStorage.clear();
-
-    location.reload();
-
-}
-
-// =========================
-// Đọc mục tiêu Firebase
-// =========================
-
-async function loadGoal(){
-
-    if(!studentPhone) return;
-
-    const ref = doc(db,"hoc_sinh",studentPhone);
-
-    const snap = await getDoc(ref);
-
-    if(!snap.exists()) return;
-
-    const data = snap.data();
-
-    document.getElementById("goalCard").style.display="block";
-
-    document.getElementById("goalName").innerHTML =
-        data.goal || "Chưa thiết lập mục tiêu";
-
-    let progress = data.progress || 0;
-
-    document.getElementById("goalBar").style.width =
-        progress + "%";
-
-    document.getElementById("goalPercent").innerHTML =
-        progress + "% hoàn thành";
-
-    document.getElementById("streak").innerHTML =
-        (data.streak || 0) + " ngày";
-
-    document.getElementById("badge").innerHTML =
-        data.badge || "🌱 Khởi đầu";
-
-    document.getElementById("questionCount").innerHTML =
-        (data.totalQuestion || 0) + " câu";
-
-    document.getElementById("examCount").innerHTML =
-        (data.totalExam || 0) + " đề";
-
-}
-
-loadGoal();
-
-// =========================
-// Nút mục tiêu
-// =========================
-
-document.getElementById("goalBtn").onclick=function(){
-
-    location.href="goal.html";
-
-}
-
-// =========================
-// Vào thi
-// =========================
-
-window.vaoThi=function(link){
-
-    if(!studentPhone){
-
-        alert("Vui lòng đăng nhập trước.");
-
-        location.href="login.html";
-
-        return;
-
-    }
-
-    location.href=link;
-
-}
-
-</script>
-
-</body>
-</html>
 body{
-background:#f4f7fc;
+background:#f5f7fb;
 color:#333;
 }
 
 header{
 
-background:linear-gradient(90deg,#0057ff,#1b7cff);
+background:linear-gradient(90deg,#0057ff,#1976ff);
+
 color:white;
+
 padding:25px;
+
 text-align:center;
 
 }
@@ -167,14 +45,17 @@ font-size:36px;
 header p{
 
 margin-top:10px;
+
 font-size:18px;
+
 opacity:.95;
 
 }
 
 #userBox{
 
-margin-top:20px;
+margin-top:18px;
+
 font-size:18px;
 
 }
@@ -182,13 +63,15 @@ font-size:18px;
 .hero{
 
 padding:60px 20px;
+
 text-align:center;
 
 }
 
 .hero h2{
 
-font-size:50px;
+font-size:48px;
+
 margin-bottom:20px;
 
 }
@@ -196,6 +79,7 @@ margin-bottom:20px;
 .hero p{
 
 font-size:22px;
+
 color:#666;
 
 }
@@ -203,21 +87,30 @@ color:#666;
 .button{
 
 display:inline-block;
-margin-top:35px;
+
+margin-top:30px;
+
 background:#0057ff;
+
 color:white;
-padding:16px 45px;
+
+padding:16px 42px;
+
 border-radius:12px;
-font-size:22px;
-font-weight:bold;
+
 text-decoration:none;
+
+font-size:22px;
+
+font-weight:bold;
+
 transition:.3s;
 
 }
 
 .button:hover{
 
-background:#0044cc;
+background:#0045cf;
 
 }
 
@@ -231,43 +124,37 @@ margin:40px auto;
 
 background:white;
 
-border-radius:25px;
-
 padding:35px;
+
+border-radius:20px;
 
 box-shadow:0 10px 30px rgba(0,0,0,.08);
 
 }
 
-.goalCard h2{
-
-color:#0057ff;
-
-margin-bottom:15px;
-
-}
-
 .goalTitle{
 
-font-size:28px;
+font-size:30px;
 
 font-weight:bold;
 
-margin-bottom:15px;
+color:#0057ff;
+
+margin-top:10px;
 
 }
 
 .progress{
 
-height:26px;
+margin-top:25px;
+
+height:24px;
 
 background:#ececec;
 
 border-radius:30px;
 
 overflow:hidden;
-
-margin-top:20px;
 
 }
 
@@ -285,19 +172,19 @@ transition:1s;
 
 .goalInfo{
 
-margin-top:20px;
+margin-top:30px;
 
 display:grid;
 
-grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
 
 gap:20px;
 
 }
 
-.box{
+.infoBox{
 
-background:#f7f9ff;
+background:#f5f8ff;
 
 padding:20px;
 
@@ -305,11 +192,11 @@ border-radius:15px;
 
 }
 
-.box h3{
-
-margin-bottom:10px;
+.infoBox h3{
 
 color:#0057ff;
+
+margin-bottom:10px;
 
 }
 
@@ -317,17 +204,17 @@ color:#0057ff;
 
 margin-top:30px;
 
+padding:14px 35px;
+
 background:#0057ff;
 
 color:white;
 
 border:none;
 
-padding:14px 30px;
+border-radius:10px;
 
 font-size:18px;
-
-border-radius:10px;
 
 cursor:pointer;
 
@@ -335,19 +222,17 @@ cursor:pointer;
 
 .goalBtn:hover{
 
-background:#0044cc;
+background:#0045cf;
 
 }
 
 .section-title{
 
-margin-top:60px;
-
-margin-bottom:35px;
-
 text-align:center;
 
-font-size:38px;
+font-size:36px;
+
+margin:60px 0 35px;
 
 }
 
@@ -355,7 +240,7 @@ font-size:38px;
 
 display:grid;
 
-grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
 
 gap:25px;
 
@@ -371,11 +256,11 @@ padding:30px;
 
 border-radius:20px;
 
-box-shadow:0 5px 18px rgba(0,0,0,.08);
+box-shadow:0 6px 20px rgba(0,0,0,.08);
 
 text-align:center;
 
-transition:.25s;
+transition:.3s;
 
 }
 
@@ -411,7 +296,7 @@ color:white;
 
 border:none;
 
-padding:12px 35px;
+padding:12px 30px;
 
 border-radius:10px;
 
@@ -423,25 +308,27 @@ cursor:pointer;
 
 .card button:hover{
 
-background:#0044cc;
+background:#0045cf;
 
 }
 
 footer{
 
+margin-top:40px;
+
 background:#111;
 
 color:white;
 
-text-align:center;
-
 padding:40px;
+
+text-align:center;
 
 }
 
 footer p{
 
-margin:8px 0;
+margin:8px;
 
 }
 
@@ -453,9 +340,17 @@ margin:8px 0;
 
 <header>
 
-<h1>🎓 Thi ĐIỂM CAO cùng Thầy Hoàng MpC</h1>
+<h1>
 
-<p>Thi THPT • Thi ĐGNL • Thi định kỳ 10 • 11 • 12</p>
+🎓 Thi ĐIỂM CAO cùng Thầy Hoàng MpC
+
+</h1>
+
+<p>
+
+Thi THPT • ĐGNL • TS10 • Kiểm tra định kỳ
+
+</p>
 
 <div id="userBox"></div>
 
@@ -463,23 +358,38 @@ margin:8px 0;
 
 <section class="hero">
 
-<h2>Thi thử như thi thật</h2>
+<h2>
 
-<p>Luyện đề mọi lúc • Chấm điểm tự động • Thống kê kết quả</p>
+Thi thử như thi thật
 
-<a id="loginBtn" class="button" href="login.html">
+</h2>
+
+<p>
+
+Luyện đề mọi lúc • Chấm điểm tự động • Thống kê kết quả
+
+</p>
+
+<a
+
+id="loginBtn"
+
+class="button"
+
+href="login.html">
 
 Đăng nhập
 
 </a>
 
 </section>
-
 <div class="goalCard" id="goalCard">
 
 <h2>🎯 Hành trình chinh phục mục tiêu</h2>
 
-<div id="goalName" class="goalTitle"></div>
+<div id="goalName" class="goalTitle">
+Chưa thiết lập mục tiêu
+</div>
 
 <div class="progress">
 
@@ -489,47 +399,55 @@ margin:8px 0;
 
 <h3 id="goalPercent"
 style="margin-top:18px;">
-0%
+0% hoàn thành
 </h3>
 
 <div class="goalInfo">
 
-<div class="box">
+<div class="infoBox">
 
 <h3>🔥 Chuỗi học</h3>
 
 <p id="streak">
+
 0 ngày
+
 </p>
 
 </div>
 
-<div class="box">
+<div class="infoBox">
 
 <h3>🏅 Huy hiệu</h3>
 
 <p id="badge">
+
 🌱 Khởi đầu
+
 </p>
 
 </div>
 
-<div class="box">
+<div class="infoBox">
 
 <h3>📚 Đã luyện</h3>
 
 <p id="questionCount">
+
 0 câu
+
 </p>
 
 </div>
 
-<div class="box">
+<div class="infoBox">
 
 <h3>📝 Đề đã làm</h3>
 
 <p id="examCount">
+
 0 đề
+
 </p>
 
 </div>
@@ -590,7 +508,7 @@ Làm bài
 
 <h3>💡 Tuyển sinh 10</h3>
 
-<p>Luyện đề TS10</p>
+<p>Luyện đề tuyển sinh lớp 10</p>
 
 <button onclick="vaoThi('ts10.html')">
 
@@ -604,7 +522,7 @@ Làm bài
 
 <h3>📖 Kiểm tra</h3>
 
-<p>Kiểm tra định kỳ 10-11-12</p>
+<p>Kiểm tra định kỳ 10 • 11 • 12</p>
 
 <button onclick="vaoThi('exam.html')">
 
@@ -618,12 +536,166 @@ Làm bài
 
 <footer>
 
-<p>🎵 TikTok: Thầy Hoàng và lũ trẻ yêu Toán</p>
+<p>
 
-<p>📘 Facebook: Thầy Minh Hoàng</p>
+🎵 TikTok: Thầy Hoàng và lũ trẻ yêu Toán
+
+</p>
+
+<p>
+
+📘 Facebook: Thầy Minh Hoàng
+
+</p>
 
 <br>
 
-<p>© Thi ĐIỂM CAO cùng Thầy Hoàng MpC</p>
+<p>
+
+© Mê HỌC TOÁN - Mê ĐIỂM CAO
+
+</p>
 
 </footer>
+<script type="module">
+
+import { db } from "./js/firebase.js";
+
+import {
+
+doc,
+
+getDoc
+
+}
+
+from "https://www.gstatic.com/firebasejs/12.17.0/firebase-firestore.js";
+
+const studentName = localStorage.getItem("studentName");
+
+const studentPhone = localStorage.getItem("studentPhone");
+
+const userBox = document.getElementById("userBox");
+
+const loginBtn = document.getElementById("loginBtn");
+
+if(studentName){
+
+userBox.innerHTML=`
+
+👋 Xin chào <b>${studentName}</b>
+
+<br><br>
+
+<button onclick="logout()"
+
+style="
+
+padding:8px 18px;
+
+background:white;
+
+color:#0057ff;
+
+border:none;
+
+border-radius:8px;
+
+cursor:pointer;
+
+font-weight:bold;
+
+">
+
+Đăng xuất
+
+</button>
+
+`;
+
+loginBtn.style.display="none";
+
+}
+
+window.logout=function(){
+
+localStorage.clear();
+
+location.reload();
+
+}
+
+window.vaoThi=function(link){
+
+if(!studentPhone){
+
+alert("Vui lòng đăng nhập trước.");
+
+location.href="login.html";
+
+return;
+
+}
+
+location.href=link;
+
+}
+
+async function loadGoal(){
+
+if(!studentPhone){
+
+return;
+
+}
+
+const ref=doc(db,"hoc_sinh",studentPhone);
+
+const snap=await getDoc(ref);
+
+if(!snap.exists()){
+
+return;
+
+}
+
+const data=snap.data();
+
+document.getElementById("goalCard").style.display="block";
+
+document.getElementById("goalName").innerHTML=
+
+data.goal || "Chưa thiết lập mục tiêu";
+    document.getElementById("goalBar").style.width =
+(data.progress || 0) + "%";
+
+document.getElementById("goalPercent").innerHTML =
+(data.progress || 0) + "% hoàn thành";
+
+document.getElementById("streak").innerHTML =
+(data.streak || 0) + " ngày";
+
+document.getElementById("badge").innerHTML =
+data.badge || "🌱 Khởi đầu";
+
+document.getElementById("questionCount").innerHTML =
+(data.totalQuestion || 0) + " câu";
+
+document.getElementById("examCount").innerHTML =
+(data.totalExam || 0) + " đề";
+
+}
+
+loadGoal();
+
+document.getElementById("goalBtn").onclick=function(){
+
+location.href="goal.html";
+
+};
+
+</script>
+
+</body>
+
+</html>
