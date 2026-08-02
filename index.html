@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -14,72 +15,348 @@ padding:0;
 box-sizing:border-box;
 font-family:Arial,sans-serif;
 }
+<script type="module">
 
+import { db } from "./js/firebase.js";
+
+import {
+doc,
+getDoc
+}
+from "https://www.gstatic.com/firebasejs/12.17.0/firebase-firestore.js";
+
+// =========================
+// Thông tin học sinh
+// =========================
+
+const studentName = localStorage.getItem("studentName");
+const studentPhone = localStorage.getItem("studentPhone");
+
+const userBox = document.getElementById("userBox");
+const loginBtn = document.getElementById("loginBtn");
+
+if(studentName){
+
+    userBox.innerHTML = `
+    👋 Xin chào <b>${studentName}</b>
+    <br><br>
+    <button onclick="logout()"
+    style="
+    padding:8px 18px;
+    border:none;
+    border-radius:8px;
+    background:#fff;
+    color:#0057ff;
+    cursor:pointer;
+    font-weight:bold;">
+    Đăng xuất
+    </button>
+    `;
+
+    loginBtn.style.display="none";
+
+}
+
+window.logout=function(){
+
+    localStorage.clear();
+
+    location.reload();
+
+}
+
+// =========================
+// Đọc mục tiêu Firebase
+// =========================
+
+async function loadGoal(){
+
+    if(!studentPhone) return;
+
+    const ref = doc(db,"hoc_sinh",studentPhone);
+
+    const snap = await getDoc(ref);
+
+    if(!snap.exists()) return;
+
+    const data = snap.data();
+
+    document.getElementById("goalCard").style.display="block";
+
+    document.getElementById("goalName").innerHTML =
+        data.goal || "Chưa thiết lập mục tiêu";
+
+    let progress = data.progress || 0;
+
+    document.getElementById("goalBar").style.width =
+        progress + "%";
+
+    document.getElementById("goalPercent").innerHTML =
+        progress + "% hoàn thành";
+
+    document.getElementById("streak").innerHTML =
+        (data.streak || 0) + " ngày";
+
+    document.getElementById("badge").innerHTML =
+        data.badge || "🌱 Khởi đầu";
+
+    document.getElementById("questionCount").innerHTML =
+        (data.totalQuestion || 0) + " câu";
+
+    document.getElementById("examCount").innerHTML =
+        (data.totalExam || 0) + " đề";
+
+}
+
+loadGoal();
+
+// =========================
+// Nút mục tiêu
+// =========================
+
+document.getElementById("goalBtn").onclick=function(){
+
+    location.href="goal.html";
+
+}
+
+// =========================
+// Vào thi
+// =========================
+
+window.vaoThi=function(link){
+
+    if(!studentPhone){
+
+        alert("Vui lòng đăng nhập trước.");
+
+        location.href="login.html";
+
+        return;
+
+    }
+
+    location.href=link;
+
+}
+
+</script>
+
+</body>
+</html>
 body{
-background:#f5f7fb;
+background:#f4f7fc;
 color:#333;
 }
 
 header{
-background:#0057ff;
+
+background:linear-gradient(90deg,#0057ff,#1b7cff);
 color:white;
-padding:20px;
+padding:25px;
 text-align:center;
+
 }
 
 header h1{
-font-size:34px;
-margin-bottom:10px;
+
+font-size:36px;
+
 }
 
 header p{
+
+margin-top:10px;
 font-size:18px;
 opacity:.95;
+
+}
+
+#userBox{
+
+margin-top:20px;
+font-size:18px;
+
 }
 
 .hero{
+
 padding:60px 20px;
 text-align:center;
+
 }
 
 .hero h2{
-font-size:48px;
+
+font-size:50px;
 margin-bottom:20px;
+
 }
 
 .hero p{
+
 font-size:22px;
-color:#555;
-margin-bottom:35px;
+color:#666;
+
 }
 
 .button{
+
 display:inline-block;
+margin-top:35px;
 background:#0057ff;
 color:white;
 padding:16px 45px;
-border-radius:10px;
-text-decoration:none;
+border-radius:12px;
 font-size:22px;
 font-weight:bold;
+text-decoration:none;
 transition:.3s;
+
 }
 
 .button:hover{
+
 background:#0044cc;
+
+}
+
+.goalCard{
+
+display:none;
+
+max-width:900px;
+
+margin:40px auto;
+
+background:white;
+
+border-radius:25px;
+
+padding:35px;
+
+box-shadow:0 10px 30px rgba(0,0,0,.08);
+
+}
+
+.goalCard h2{
+
+color:#0057ff;
+
+margin-bottom:15px;
+
+}
+
+.goalTitle{
+
+font-size:28px;
+
+font-weight:bold;
+
+margin-bottom:15px;
+
+}
+
+.progress{
+
+height:26px;
+
+background:#ececec;
+
+border-radius:30px;
+
+overflow:hidden;
+
+margin-top:20px;
+
+}
+
+.progress div{
+
+height:100%;
+
+width:0%;
+
+background:linear-gradient(90deg,#00c853,#64dd17);
+
+transition:1s;
+
+}
+
+.goalInfo{
+
+margin-top:20px;
+
+display:grid;
+
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+
+gap:20px;
+
+}
+
+.box{
+
+background:#f7f9ff;
+
+padding:20px;
+
+border-radius:15px;
+
+}
+
+.box h3{
+
+margin-bottom:10px;
+
+color:#0057ff;
+
+}
+
+.goalBtn{
+
+margin-top:30px;
+
+background:#0057ff;
+
+color:white;
+
+border:none;
+
+padding:14px 30px;
+
+font-size:18px;
+
+border-radius:10px;
+
+cursor:pointer;
+
+}
+
+.goalBtn:hover{
+
+background:#0044cc;
+
 }
 
 .section-title{
-text-align:center;
-font-size:34px;
+
 margin-top:60px;
-margin-bottom:30px;
+
+margin-bottom:35px;
+
+text-align:center;
+
+font-size:38px;
+
 }
 
 .grid{
 
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+
+grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+
 gap:25px;
 
 padding:0 25px 60px;
@@ -89,16 +366,29 @@ padding:0 25px 60px;
 .card{
 
 background:white;
-border-radius:18px;
+
 padding:30px;
-box-shadow:0 5px 15px rgba(0,0,0,.08);
+
+border-radius:20px;
+
+box-shadow:0 5px 18px rgba(0,0,0,.08);
+
 text-align:center;
+
+transition:.25s;
+
+}
+
+.card:hover{
+
+transform:translateY(-6px);
 
 }
 
 .card h3{
 
 font-size:30px;
+
 margin-bottom:15px;
 
 }
@@ -106,19 +396,27 @@ margin-bottom:15px;
 .card p{
 
 font-size:18px;
-margin-bottom:25px;
+
 color:#666;
+
+margin-bottom:25px;
 
 }
 
 .card button{
 
 background:#0057ff;
+
 color:white;
+
 border:none;
-padding:13px 30px;
-border-radius:8px;
+
+padding:12px 35px;
+
+border-radius:10px;
+
 font-size:18px;
+
 cursor:pointer;
 
 }
@@ -132,28 +430,18 @@ background:#0044cc;
 footer{
 
 background:#111;
+
 color:white;
-padding:40px;
+
 text-align:center;
 
-}
-
-footer h3{
-
-margin-bottom:15px;
+padding:40px;
 
 }
 
 footer p{
 
 margin:8px 0;
-
-}
-
-.social{
-
-margin-top:25px;
-font-size:20px;
 
 }
 
@@ -167,115 +455,105 @@ font-size:20px;
 
 <h1>🎓 Thi ĐIỂM CAO cùng Thầy Hoàng MpC</h1>
 
-<p>Thi THPT • Thi ĐGNL • Thi định kỳ 10, 11, 12</p>
-<div id="userBox" style="margin-top:15px;font-size:18px;"></div>
+<p>Thi THPT • Thi ĐGNL • Thi định kỳ 10 • 11 • 12</p>
+
+<div id="userBox"></div>
+
 </header>
 
 <section class="hero">
 
 <h2>Thi thử như thi thật</h2>
 
-<p>
-Luyện đề mọi lúc • Chấm điểm tự động • Thống kê kết quả
-</p>
+<p>Luyện đề mọi lúc • Chấm điểm tự động • Thống kê kết quả</p>
 
-<div id="heroAction">
-<div id="goalCard" style="display:none;margin:40px auto;max-width:700px;">
+<a id="loginBtn" class="button" href="login.html">
 
-<div style="
-background:white;
-padding:30px;
-border-radius:20px;
-box-shadow:0 8px 25px rgba(0,0,0,.1);
-">
-
-<h2>🎯 Hành trình chinh phục mục tiêu</h2>
-
-<h3 id="goalName"
-style="margin-top:20px;color:#0057ff;">
-</h3>
-
-<p id="goalSchool"
-style="font-size:18px;color:#666;">
-</p>
-
-<div style="
-margin-top:25px;
-background:#eee;
-height:24px;
-border-radius:30px;
-overflow:hidden;
-">
-
-<div id="goalBar"
-style="
-width:0%;
-height:100%;
-background:linear-gradient(90deg,#00c853,#64dd17);
-transition:1s;
-">
-</div>
-
-</div>
-
-<h2 id="goalPercent"
-style="margin-top:15px;">
-0%
-</h2>
-
-<hr style="margin:25px 0;">
-
-<div id="todayMission"></div>
-
-<hr style="margin:25px 0;">
-
-<div id="streak"></div>
-
-<hr style="margin:25px 0;">
-
-<div id="nextReward"></div>
-
-<button
-id="goalBtn"
-style="
-margin-top:25px;
-padding:12px 25px;
-background:#0057ff;
-color:white;
-border:none;
-border-radius:8px;
-cursor:pointer;
-">
-Chi tiết hành trình
-</button>
-
-</div>
-
-</div>
-<p id="goalPercent"
-style="margin-top:15px;font-size:18px;">
-0%
-</p>
-
-<button
-id="goalBtn"
-style="margin-top:20px;">
-Thiết lập mục tiêu
-</button>
-
-</div>
-
-</div>
-<a class="button" id="loginBtn" href="login.html">
 Đăng nhập
-</a>
 
-</div>
+</a>
 
 </section>
 
+<div class="goalCard" id="goalCard">
+
+<h2>🎯 Hành trình chinh phục mục tiêu</h2>
+
+<div id="goalName" class="goalTitle"></div>
+
+<div class="progress">
+
+<div id="goalBar"></div>
+
+</div>
+
+<h3 id="goalPercent"
+style="margin-top:18px;">
+0%
+</h3>
+
+<div class="goalInfo">
+
+<div class="box">
+
+<h3>🔥 Chuỗi học</h3>
+
+<p id="streak">
+0 ngày
+</p>
+
+</div>
+
+<div class="box">
+
+<h3>🏅 Huy hiệu</h3>
+
+<p id="badge">
+🌱 Khởi đầu
+</p>
+
+</div>
+
+<div class="box">
+
+<h3>📚 Đã luyện</h3>
+
+<p id="questionCount">
+0 câu
+</p>
+
+</div>
+
+<div class="box">
+
+<h3>📝 Đề đã làm</h3>
+
+<p id="examCount">
+0 đề
+</p>
+
+</div>
+
+</div>
+
+<div style="text-align:center;">
+
+<button
+id="goalBtn"
+class="goalBtn">
+
+Thiết lập mục tiêu
+
+</button>
+
+</div>
+
+</div>
+
 <h2 class="section-title">
+
 📚 Chọn kỳ thi
+
 </h2>
 
 <div class="grid">
@@ -284,21 +562,26 @@ Thiết lập mục tiêu
 
 <h3>🎓 THPT</h3>
 
-<p>Luyện đề thực chiến thi TN THPT</p>
+<p>Luyện đề thi tốt nghiệp THPT</p>
 
 <button onclick="vaoThi('thpt.html')">
+
 Làm bài
+
 </button>
+
 </div>
 
 <div class="card">
 
 <h3>🧠 ĐGNL</h3>
 
-<p>Luyện đề thi đánh giá năng lực</p>
+<p>Luyện đề đánh giá năng lực</p>
 
 <button onclick="vaoThi('dgnl.html')">
+
 Làm bài
+
 </button>
 
 </div>
@@ -307,164 +590,40 @@ Làm bài
 
 <h3>💡 Tuyển sinh 10</h3>
 
-<p>Luyện đề thi TS10</p>
-  
+<p>Luyện đề TS10</p>
+
 <button onclick="vaoThi('ts10.html')">
+
 Làm bài
+
 </button>
+
 </div>
 
 <div class="card">
-  
+
 <h3>📖 Kiểm tra</h3>
 
-<p>Kiểm tra định kỳ Toán 10,11,12</p>
-  
-<button onclick="vaoThi('kiemtra.html')">
+<p>Kiểm tra định kỳ 10-11-12</p>
+
+<button onclick="vaoThi('exam.html')">
+
 Làm bài
+
 </button>
+
 </div>
 
 </div>
 
 <footer>
 
-<h3>Liên hệ</h3>
-
-<div class="social">
-
 <p>🎵 TikTok: Thầy Hoàng và lũ trẻ yêu Toán</p>
 
 <p>📘 Facebook: Thầy Minh Hoàng</p>
 
-</div>
+<br>
 
-<p style="margin-top:25px;">
-© Mê học TOÁN - Mê điểm CAO
-</p>
+<p>© Thi ĐIỂM CAO cùng Thầy Hoàng MpC</p>
 
 </footer>
-<script>
-
-const ten = localStorage.getItem("studentName");
-
-if (ten) {
-
-    document.getElementById("userBox").innerHTML = `
-    Xin chào <b>${ten}</b> 👋
-    <button onclick="logout()"
-    style="margin-left:15px;padding:6px 12px;border:none;border-radius:6px;cursor:pointer;">
-    Đăng xuất
-    </button>
-    `;
-
-document.getElementById("heroAction").innerHTML = `
-<h3 style="color:#0057ff;">👋 Chào em ${ten}</h3>
-<p>Chúc em có một buổi thi thử như thi thật hiệu quả!</p>
-`;}
-
-function vaoThi(link){
-
-    if(!localStorage.getItem("studentName")){
-        alert("Vui lòng đăng nhập trước.");
-        location.href="login.html";
-        return;
-    }
-
-    location.href = link;
-}
-loadGoal();
-
-function loadGoal(){
-
-const goal=localStorage.getItem("goal");
-
-document.getElementById("goalCard").style.display="block";
-
-if(!goal){
-
-document.getElementById("goalName").innerHTML=
-"🎯 Em chưa thiết lập mục tiêu.";
-
-document.getElementById("goalSchool").innerHTML=
-"Hãy tạo mục tiêu để bắt đầu hành trình.";
-
-document.getElementById("goalPercent").innerHTML="0%";
-
-document.getElementById("goalBar").style.width="0%";
-
-document.getElementById("todayMission").innerHTML="";
-
-document.getElementById("streak").innerHTML="";
-
-document.getElementById("nextReward").innerHTML="";
-
-document.getElementById("goalBtn").innerHTML=
-"✨ Thiết lập ngay";
-
-document.getElementById("goalBtn").onclick=function(){
-
-location.href="goal.html";
-
-};
-
-return;
-
-}
-
-const percent=parseInt(localStorage.getItem("goalPercent")||0);
-
-const streak=localStorage.getItem("streak")||0;
-
-document.getElementById("goalName").innerHTML=
-"🏆 "+goal;
-
-document.getElementById("goalSchool").innerHTML=
-"Đích đến của em";
-
-document.getElementById("goalPercent").innerHTML=
-percent+"% hoàn thành";
-
-document.getElementById("goalBar").style.width=
-percent+"%";
-
-document.getElementById("todayMission").innerHTML=`
-
-<h3>🔥 Nhiệm vụ hôm nay</h3>
-
-<p>☐ Làm 20 câu hỏi</p>
-
-<p>☐ Hoàn thành 1 đề thi</p>
-
-<p>☐ Xem lại các câu sai</p>
-
-`;
-
-document.getElementById("streak").innerHTML=`
-
-<h3>🔥 Chuỗi học tập</h3>
-
-<p>Đã học liên tiếp <b>${streak}</b> ngày</p>
-
-`;
-
-const badge=localStorage.getItem("badge")||"Chưa có";
-
-document.getElementById("nextReward").innerHTML=`
-
-<h3>🏅 Thành tích</h3>
-
-<p>Huy hiệu hiện tại: <b>${badge}</b></p>
-
-`;
-
-document.getElementById("goalBtn").innerHTML=
-"⚙️ Chỉnh sửa mục tiêu";
-
-document.getElementById("goalBtn").onclick=function(){
-
-location.href="goal.html";
-
-};
-
-}
