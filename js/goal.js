@@ -1,86 +1,176 @@
 import { db } from "./firebase.js";
 
 import {
-
 doc,
-
 setDoc,
-
 getDoc
-
 }
-
 from "https://www.gstatic.com/firebasejs/12.17.0/firebase-firestore.js";
-const studentPhone=localStorage.getItem("studentPhone");
 
-const grade=document.getElementById("grade");
+const studentPhone = localStorage.getItem("studentPhone");
 
-const goal=document.getElementById("goal");
+const grade = document.getElementById("grade");
+const goal = document.getElementById("goal");
+const saveBtn = document.getElementById("saveBtn");
 
-const saveBtn=document.getElementById("saveBtn");
-async function loadGoal(){
 
-if(!studentPhone)return;
+// =======================
+// Danh sách mục tiêu
+// =======================
 
-const ref=doc(db,"goals",studentPhone);
+grade.onchange = function () {
 
-const snap=await getDoc(ref);
+    goal.innerHTML = "";
 
-if(!snap.exists())return;
+    if (grade.value == "9") {
 
-const data=snap.data();
+        goal.innerHTML = `
+        <option>Đỗ THPT công lập</option>
+        <option>Đỗ THPT Chuyên</option>
+        <option>Đỗ THPT Chuyên Lam Sơn</option>
+        <option>Đỗ THPT Chuyên KHTN</option>
+        <option>Đỗ THPT Chuyên Amsterdam</option>
+        <option>Đỗ THPT Chuyên Phan Bội Châu</option>
+        <option>Đỗ THPT Chuyên Lê Hồng Phong</option>
+        `;
 
-grade.value=data.grade;
+    }
 
-grade.dispatchEvent(new Event("change"));
+    if (grade.value == "10") {
 
-goal.value=data.goal;
+        goal.innerHTML = `
+        <option>Đạt Học sinh Xuất sắc</option>
+        <option>Điểm trung bình ≥ 9.0</option>
+        <option>Top 10 lớp</option>
+        <option>Top 5 lớp</option>
+        `;
+
+    }
+
+    if (grade.value == "11") {
+
+        goal.innerHTML = `
+        <option>Đạt Học sinh Xuất sắc</option>
+        <option>Điểm trung bình ≥ 9.2</option>
+        <option>Top 5 lớp</option>
+        <option>Sẵn sàng thi THPT</option>
+        `;
+
+    }
+
+    if (grade.value == "12") {
+
+        goal.innerHTML = `
+        <option>Đỗ Đại học Bách Khoa Hà Nội</option>
+        <option>Đỗ Đại học Y Hà Nội</option>
+        <option>Đỗ Đại học Ngoại thương</option>
+        <option>Đỗ Đại học Kinh tế Quốc dân</option>
+        <option>Đỗ Đại học Sư phạm Hà Nội</option>
+        <option>Đỗ Đại học Công nghệ - ĐHQGHN</option>
+        <option>Đỗ Học viện Kỹ thuật Quân sự</option>
+        <option>Đỗ Học viện An ninh</option>
+        <option>Đỗ Học viện Cảnh sát</option>
+        `;
+
+    }
+
+};
+
+
+// =======================
+// Đọc mục tiêu đã lưu
+// =======================
+
+async function loadGoal() {
+
+    if (!studentPhone) return;
+
+    const ref = doc(db, "hoc_sinh", studentPhone);
+
+    const snap = await getDoc(ref);
+
+    if (!snap.exists()) return;
+
+    const data = snap.data();
+
+    if (data.grade) {
+
+        grade.value = data.grade;
+
+        grade.dispatchEvent(new Event("change"));
+
+    }
+
+    if (data.goal) {
+
+        goal.value = data.goal;
+
+    }
 
 }
-saveBtn.onclick=async function(){
 
-if(grade.value==""){
 
-alert("Hãy chọn lớp.");
+// =======================
+// Lưu mục tiêu
+// =======================
 
-return;
+saveBtn.onclick = async function () {
 
-}
+    if (grade.value == "") {
 
-if(goal.value==""){
+        alert("Hãy chọn lớp.");
 
-alert("Hãy chọn mục tiêu.");
+        return;
 
-return;
+    }
 
-}
+    if (goal.value == "") {
 
-await setDoc(doc(db,"goals",studentPhone),{
+        alert("Hãy chọn mục tiêu.");
 
-grade:grade.value,
+        return;
 
-goal:goal.value,
+    }
 
-progress:0,
+    await setDoc(
 
-streak:0,
+        doc(db, "hoc_sinh", studentPhone),
 
-badge:"Chưa có",
+        {
 
-totalQuestion:0,
+            grade: grade.value,
 
-totalExam:0,
+            goal: goal.value,
 
-createdAt:new Date(),
+            progress: 0,
 
-updatedAt:new Date()
+            streak: 0,
 
-});
+            badge: "🌱 Khởi đầu",
 
-alert("🎉 Đã lưu mục tiêu thành công!");
+            totalQuestion: 0,
 
-location.href="index.html";
+            totalExam: 0,
 
-}
+            updatedAt: new Date().toISOString()
+
+        },
+
+        {
+
+            merge: true
+
+        }
+
+    );
+
+    alert("🎉 Thiết lập mục tiêu thành công!");
+
+    location.href = "index.html";
+
+};
+
+
+// =======================
+
 loadGoal();
-
