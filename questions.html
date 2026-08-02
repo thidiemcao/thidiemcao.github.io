@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Quản lý câu hỏi</title>
+
+<style>
+
+body{
+font-family:Arial;
+background:#f4f6fb;
+margin:0;
+}
+
+header{
+background:#0057ff;
+color:white;
+padding:20px;
+text-align:center;
+}
+
+table{
+width:95%;
+margin:30px auto;
+border-collapse:collapse;
+background:white;
+}
+
+th,td{
+padding:12px;
+border:1px solid #ddd;
+}
+
+th{
+background:#0057ff;
+color:white;
+}
+
+tr:nth-child(even){
+background:#f7f7f7;
+}
+
+button{
+padding:8px 15px;
+cursor:pointer;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+<h1>📚 Ngân hàng câu hỏi</h1>
+
+</header>
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>Chuyên đề</th>
+
+<th>Bài học</th>
+
+<th>Mức</th>
+
+<th>Câu hỏi</th>
+
+</tr>
+
+</thead>
+
+<tbody id="tableData">
+
+</tbody>
+
+</table>
+
+<script type="module">
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.17.0/firebase-app.js";
+
+import {
+
+getFirestore,
+
+collection,
+
+getDocs
+
+}
+
+from "https://www.gstatic.com/firebasejs/12.17.0/firebase-firestore.js";
+
+const firebaseConfig={
+
+apiKey:"AIzaSyAn5qW3LKUyEAgGBd0Yb8T4_ZoBujQKFbY",
+
+authDomain:"thidiemcao-4097d.firebaseapp.com",
+
+projectId:"thidiemcao-4097d",
+
+storageBucket:"thidiemcao-4097d.firebasestorage.app",
+
+messagingSenderId:"333180855649",
+
+appId:"1:333180855649:web:e46ce1e15a715b3f0c5120"
+
+};
+
+const app=initializeApp(firebaseConfig);
+
+const db=getFirestore(app);
+
+const snap=await getDocs(collection(db,"questions"));
+
+let html="";
+
+snap.forEach(doc=>{
+
+const q=doc.data();
+
+html+=`
+
+<tr>
+
+<td>${q.chapter}</td>
+
+<td>${q.lesson}</td>
+
+<td>${q.level}</td>
+
+<td>${q.question}</td>
+
+</tr>
+
+`;
+
+});
+
+document.getElementById("tableData").innerHTML=html;
+
+</script>
+
+</body>
+</html>
