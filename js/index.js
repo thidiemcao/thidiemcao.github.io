@@ -81,7 +81,11 @@ async function loadGoal(){
 
         const ref = doc(db, "hoc_sinh", studentPhone);
         const snap=await getDoc(ref);
+        console.log("Có dữ liệu:", snap.exists());
 
+        if (snap.exists()) {
+        console.log(snap.data());
+        }
         if(!snap.exists()){
 
             document.getElementById("goalName").innerHTML=
