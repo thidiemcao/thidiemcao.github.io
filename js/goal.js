@@ -37,4 +37,50 @@ grade.dispatchEvent(new Event("change"));
 goal.value=data.goal;
 
 }
+saveBtn.onclick=async function(){
+
+if(grade.value==""){
+
+alert("Hãy chọn lớp.");
+
+return;
+
+}
+
+if(goal.value==""){
+
+alert("Hãy chọn mục tiêu.");
+
+return;
+
+}
+
+await setDoc(doc(db,"goals",studentPhone),{
+
+grade:grade.value,
+
+goal:goal.value,
+
+progress:0,
+
+streak:0,
+
+badge:"Chưa có",
+
+totalQuestion:0,
+
+totalExam:0,
+
+createdAt:new Date(),
+
+updatedAt:new Date()
+
+});
+
+alert("🎉 Đã lưu mục tiêu thành công!");
+
+location.href="index.html";
+
+}
 loadGoal();
+
