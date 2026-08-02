@@ -214,13 +214,57 @@ if(progress>=100){
 localStorage.setItem("badge","🏆 Chinh phục mục tiêu");
 
 }
-    alert(
-        "Bạn đúng "
-        +score+
-        "/"+
-        questions.length+
-        " câu."
-    );
+    const aiBox = document.getElementById("aiResult");
+
+let percent = Math.round(score / questions.length * 100);
+
+let comment = "";
+let advice = "";
+
+if(percent >= 90){
+
+    comment = "🌟 Xuất sắc! Em nắm kiến thức rất chắc.";
+    advice = "Tiếp tục luyện đề khó để hướng tới điểm tuyệt đối.";
+
+}
+else if(percent >= 70){
+
+    comment = "👍 Khá tốt! Em đã có nền tảng vững.";
+    advice = "Ôn lại các câu sai và luyện thêm 1-2 đề mỗi ngày.";
+
+}
+else if(percent >= 50){
+
+    comment = "📚 Kiến thức ở mức trung bình.";
+    advice = "Nên luyện lại các dạng bài cơ bản trước khi làm đề mới.";
+
+}
+else{
+
+    comment = "💪 Đừng nản! Em vẫn còn nhiều cơ hội cải thiện.";
+    advice = "Bắt đầu từ các chuyên đề cơ bản rồi luyện đề dần.";
+
+}
+
+aiBox.style.display = "block";
+
+aiBox.innerHTML = `
+<h3>🤖 AI nhận xét bài làm</h3>
+
+<p><b>Điểm:</b> ${score}/${questions.length} (${percent}%)</p>
+
+<p class="good">${comment}</p>
+
+<div class="tip">
+<b>🎯 AI gợi ý:</b><br>
+${advice}
+</div>
+`;
+
+window.scrollTo({
+    top: document.body.scrollHeight,
+    behavior: "smooth"
+});
 
 }
 
