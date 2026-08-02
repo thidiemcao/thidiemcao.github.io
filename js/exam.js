@@ -78,15 +78,25 @@ function updateGrid(){
 
     for(let i=0;i<questions.length;i++){
 
-        const btn=document.createElement("button");
+        const btn=document.createElement("div");
 
-        btn.className="qbtn";
+        btn.className="question-number";
 
-        if(i==currentQuestion)
-            btn.classList.add("active");
+        if(i==currentQuestion){
 
-        if(answers[i]!="")
-            btn.style.background="#28a745";
+            btn.classList.add("current");
+
+        }
+        else if(answers[i]!=""){
+
+            btn.classList.add("answered");
+
+        }
+        else{
+
+            btn.classList.add("unanswered");
+
+        }
 
         btn.innerHTML=i+1;
 
@@ -96,11 +106,18 @@ function updateGrid(){
 
             loadQuestion(i);
 
-        }
+        };
 
         grid.appendChild(btn);
 
     }
+
+    document.getElementById("progress").innerHTML=
+    "Đã làm: "+
+    answers.filter(x=>x!="").length+
+    "/"+
+    questions.length+
+    " câu";
 
 }
 document.getElementById("submitBtn").onclick=function(){
@@ -173,4 +190,3 @@ localStorage.setItem("badge","🏆 Chinh phục mục tiêu");
 }
 
 loadQuestion(0);
-createQuestionGrid();
