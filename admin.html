@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Quản trị hệ thống</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,sans-serif;
+}
+
+body{
+background:#f4f6fb;
+}
+
+header{
+background:#0057ff;
+color:white;
+padding:20px;
+text-align:center;
+}
+
+.container{
+max-width:1100px;
+margin:40px auto;
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:25px;
+padding:20px;
+}
+
+.card{
+background:white;
+padding:30px;
+border-radius:15px;
+box-shadow:0 5px 15px rgba(0,0,0,.08);
+text-align:center;
+transition:.3s;
+}
+
+.card:hover{
+transform:translateY(-5px);
+}
+
+.card h2{
+margin-bottom:15px;
+}
+
+.card button{
+
+margin-top:20px;
+background:#0057ff;
+color:white;
+border:none;
+padding:12px 25px;
+border-radius:8px;
+cursor:pointer;
+font-size:17px;
+
+}
+
+.card button:hover{
+
+background:#0044cc;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+<h1>👨‍🏫 Quản trị hệ thống</h1>
+
+<p>Thi ĐIỂM CAO cùng Thầy Hoàng MpC</p>
+
+</header>
+
+<div class="container">
+
+<div class="card">
+
+<h2>➕ Thêm câu hỏi</h2>
+
+<p>Tạo câu hỏi mới.</p>
+
+<button onclick="location.href='add-question.html'">
+Mở
+</button>
+
+</div>
+
+<div class="card">
+
+<h2>📥 Import Excel</h2>
+
+<p>Đưa hàng nghìn câu hỏi lên hệ thống.</p>
+
+<button onclick="location.href='import.html'">
+Mở
+</button>
+
+</div>
+
+<div class="card">
+
+<h2>📚 Quản lý câu hỏi</h2>
+
+<p>Xem và chỉnh sửa câu hỏi.</p>
+
+<button>
+Đang phát triển
+</button>
+
+</div>
+
+<div class="card">
+
+<h2>📝 Quản lý đề</h2>
+
+<p>Tạo và chỉnh sửa đề thi.</p>
+
+<button>
+Đang phát triển
+</button>
+
+</div>
+
+<div class="card">
+
+<h2>👨‍🎓 Học sinh</h2>
+
+<p>Danh sách học sinh.</p>
+
+<button>
+Đang phát triển
+</button>
+
+</div>
+
+<div class="card">
+
+<h2>📊 Thống kê</h2>
+
+<p>Kết quả học tập.</p>
+
+<button>
+Đang phát triển
+</button>
+
+</div>
+
+</div>
+
+</body>
+</html>
