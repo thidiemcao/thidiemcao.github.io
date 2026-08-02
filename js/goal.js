@@ -25,13 +25,10 @@ grade.onchange = function () {
     if (grade.value == "9") {
 
         goal.innerHTML = `
-        <option>Đỗ THPT công lập</option>
-        <option>Đỗ THPT Chuyên</option>
-        <option>Đỗ THPT Chuyên Lam Sơn</option>
-        <option>Đỗ THPT Chuyên KHTN</option>
-        <option>Đỗ THPT Chuyên Amsterdam</option>
-        <option>Đỗ THPT Chuyên Phan Bội Châu</option>
-        <option>Đỗ THPT Chuyên Lê Hồng Phong</option>
+        <option>Đỗ THPT công lập NV1</option>
+        <option>Đỗ THPT Chuyên Lê Quý Đôn</option>
+        <option>Đạt giải số HSGTP</option>
+        <option>Đạt Học sinh Xuất sắc</option>
         `;
 
     }
@@ -41,8 +38,8 @@ grade.onchange = function () {
         goal.innerHTML = `
         <option>Đạt Học sinh Xuất sắc</option>
         <option>Điểm trung bình ≥ 9.0</option>
-        <option>Top 10 lớp</option>
-        <option>Top 5 lớp</option>
+        <option>Học bá Toán nhất lớp</option>
+        <option>Top 3 lớp</option>
         `;
 
     }
@@ -51,9 +48,9 @@ grade.onchange = function () {
 
         goal.innerHTML = `
         <option>Đạt Học sinh Xuất sắc</option>
-        <option>Điểm trung bình ≥ 9.2</option>
-        <option>Top 5 lớp</option>
-        <option>Sẵn sàng thi THPT</option>
+        <option>Điểm trung bình ≥ 9.0</option>
+        <option>Học bá Toán nhất lớp</option>
+        <option>Top 3 lớp</option>
         `;
 
     }
@@ -61,15 +58,13 @@ grade.onchange = function () {
     if (grade.value == "12") {
 
         goal.innerHTML = `
-        <option>Đỗ Đại học Bách Khoa Hà Nội</option>
-        <option>Đỗ Đại học Y Hà Nội</option>
-        <option>Đỗ Đại học Ngoại thương</option>
-        <option>Đỗ Đại học Kinh tế Quốc dân</option>
-        <option>Đỗ Đại học Sư phạm Hà Nội</option>
-        <option>Đỗ Đại học Công nghệ - ĐHQGHN</option>
-        <option>Đỗ Học viện Kỹ thuật Quân sự</option>
-        <option>Đỗ Học viện An ninh</option>
-        <option>Đỗ Học viện Cảnh sát</option>
+        <option>Đỗ Đại học Kinh tế</option>
+        <option>Đỗ Đại học Bách khoa</option>
+        <option>Đỗ Đại học Ngoại ngữ</option>
+        <option>Đỗ Đại học Sư phạm</option>
+        <option>Đỗ Đại học Y Dược</option>
+        <option>Đỗ Công An, Quân đội</option>
+        <option>Đỗ Đại học Top đầu VN</option>
         `;
 
     }
