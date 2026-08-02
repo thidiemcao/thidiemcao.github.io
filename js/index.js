@@ -105,8 +105,41 @@ async function loadGoal(){
 
         const data=snap.data();
 
-        document.getElementById("goalName").innerHTML=
-        "🏆 "+data.goal;
+       let html = "";
+
+if (data.goals && data.goals.length > 0) {
+
+    data.goals.forEach(item => {
+
+        html += `
+        <span class="goal-tag">
+            🎯 ${item}
+        </span>
+        `;
+
+    });
+
+}
+else if(data.goal){
+
+    html = `
+    <span class="goal-tag">
+        🎯 ${data.goal}
+    </span>
+    `;
+
+}
+else{
+
+    html = `
+    <span class="goal-tag">
+        Chưa thiết lập mục tiêu
+    </span>
+    `;
+
+}
+
+document.getElementById("goalName").innerHTML = html;
 
         const progress=data.progress||0;
 
