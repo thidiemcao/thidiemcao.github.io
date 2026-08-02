@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Sửa câu hỏi</title>
+
+<script src="https://cdn.ckeditor.com/ckeditor5/41.4.2/classic/ckeditor.js"></script>
+
+<style>
+
+body{
+font-family:Arial,sans-serif;
+background:#f5f7fb;
+margin:0;
+}
+
+header{
+background:#0057ff;
+color:white;
+padding:20px;
+text-align:center;
+}
+
+.container{
+max-width:900px;
+margin:30px auto;
+background:white;
+padding:30px;
+border-radius:15px;
+box-shadow:0 5px 15px rgba(0,0,0,.1);
+}
+
+input,
+textarea,
+select{
+width:100%;
+padding:12px;
+margin:10px 0;
+font-size:16px;
+border:1px solid #ccc;
+border-radius:8px;
+box-sizing:border-box;
+}
+
+button{
+background:#0057ff;
+color:white;
+padding:12px 25px;
+border:none;
+border-radius:8px;
+font-size:18px;
+cursor:pointer;
+}
+
+button:hover{
+background:#0044cc;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+<h1>✏️ Sửa câu hỏi</h1>
+
+</header>
+
+<div class="container">
+
+<label>Kỳ thi</label>
+
+<select id="exam">
+
+<option>THPT</option>
+<option>ĐGNL</option>
+<option>Tuyển sinh 10</option>
+<option>Kiểm tra định kỳ</option>
+
+</select>
+
+<label>Ngân hàng</label>
+
+<select id="bank">
+
+<option>1000 Câu Dễ Sai</option>
+
+<option>500 Đề thi thử</option>
+
+<option>250 Đề phát triển chuẩn BGD</option>
+
+</select>
+
+<label>Chuyên đề</label>
+
+<select id="chapter">
+
+<option>Hàm số 12</option>
+
+<option>Thống kê 12</option>
+
+<option>Tích phân 12</option>
+
+<option>Tọa độ Oxyz 12</option>
+
+<option>Xác suất 10-12</option>
+
+<option>Kiến thức 10+11</option>
+
+</select>
+
+<label>Bài học</label>
+
+<select id="lesson">
+
+<option>Đồng biến - Nghịch biến</option>
+
+<option>Cực trị</option>
+
+<option>Tiệm cận</option>
+
+<option>Đồ thị</option>
+
+<option>Tiếp tuyến</option>
+
+<option>Tổng hợp</option>
+
+</select>
+
+<label>Mức độ</label>
+
+<select id="level">
+
+<option>🟢 Dễ</option>
+
+<option>🟡 Trung bình</option>
+
+<option>🔴 Khó</option>
+
+</select>
+
+<textarea id="question"></textarea>
+
+<input id="A" placeholder="Đáp án A">
+
+<input id="B" placeholder="Đáp án B">
+
+<input id="C" placeholder="Đáp án C">
+
+<input id="D" placeholder="Đáp án D">
+
+<select id="answer">
+
+<option>A</option>
+
+<option>B</option>
+
+<option>C</option>
+
+<option>D</option>
+
+</select>
+
+<textarea id="solution"></textarea>
+
+<br><br>
+
+<button id="saveBtn">
+
+💾 Lưu thay đổi
+
+</button>
+
+</div>
+<script type="module">
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.17.0/firebase-app.js";
+
+import {
+getFirestore,
+doc,
+getDoc,
+updateDoc
+} from "https://www.gstatic.com/firebasejs/12.17.0/firebase-firestore.js";
+
+const firebaseConfig={
+
+apiKey:"AIzaSyAn5qW3LKUyEAgGBd0Yb8T4_ZoBujQKFbY",
+
+authDomain:"thidiemcao-4097d.firebaseapp.com",
+
+projectId:"thidiemcao-4097d",
+
+storageBucket:"thidiemcao-4097d.firebasestorage.app",
+
+messagingSenderId:"333180855649",
+
+appId:"1:333180855649:web:e46ce1e15a715b3f0c5120"
+
+};
+
+const app=initializeApp(firebaseConfig);
+
+const db=getFirestore(app);
+
+const id=new URLSearchParams(location.search).get("id");
+
+let questionEditor;
+let solutionEditor;
+
+ClassicEditor
+.create(document.querySelector("#question"))
+.then(editor=>{
+
+questionEditor=editor;
+
+loadData();
+
+});
+
+ClassicEditor
+.create(document.querySelector("#solution"))
+.then(editor=>{
+
+solutionEditor=editor;
+
+});
+
+async function loadData(){
+
+const snap=await getDoc(doc(db,"questions",id));
+
+if(!snap.exists()){
+
+alert("Không tìm thấy câu hỏi!");
+
+location.href="manage-questions.html";
+
+return;
+
+}
+
+const q=snap.data();
+
+document.getElementById("exam").value=q.exam;
+
+document.getElementById("bank").value=q.bank;
+
+document.getElementById("chapter").value=q.chapter;
+
+document.getElementById("lesson").value=q.lesson;
+
+document.getElementById("level").value=q.level;
+
+document.getElementById("A").value=q.A;
+
+document.getElementById("B").value=q.B;
+
+document.getElementById("C").value=q.C;
+
+document.getElementById("D").value=q.D;
+
+document.getElementById("answer").value=q.answer;
+
+questionEditor.setData(q.question);
+
+solutionEditor.setData(q.solution);
+
+}
+
+document.getElementById("saveBtn").onclick = async function(){
+
+await updateDoc(doc(db,"questions",id),{
+
+exam:document.getElementById("exam").value,
+
+bank:document.getElementById("bank").value,
+
+chapter:document.getElementById("chapter").value,
+
+lesson:document.getElementById("lesson").value,
+
+level:document.getElementById("level").value,
+
+question:questionEditor.getData(),
+
+A:document.getElementById("A").value,
+
+B:document.getElementById("B").value,
+
+C:document.getElementById("C").value,
+
+D:document.getElementById("D").value,
+
+answer:document.getElementById("answer").value,
+
+solution:solutionEditor.getData(),
+
+updatedAt:new Date()
+
+});
+
+alert("✅ Đã cập nhật câu hỏi!");
+
+location.href="manage-questions.html";
+
+}
+
+</script>
+
+</body>
+</html>
