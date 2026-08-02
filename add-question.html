@@ -1,12 +1,90 @@
 <!DOCTYPE html>
-<html>
+<html lang="vi">
 <head>
 <meta charset="UTF-8">
-<title>Đang phát triển</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Thêm câu hỏi</title>
+
+<style>
+
+body{
+font-family:Arial,sans-serif;
+background:#f5f7fb;
+margin:0;
+}
+
+header{
+background:#0057ff;
+color:white;
+padding:20px;
+text-align:center;
+}
+
+.container{
+max-width:900px;
+margin:30px auto;
+background:white;
+padding:30px;
+border-radius:15px;
+box-shadow:0 5px 15px rgba(0,0,0,.1);
+}
+
+input, textarea, select{
+width:100%;
+padding:12px;
+margin:10px 0;
+font-size:16px;
+border:1px solid #ccc;
+border-radius:8px;
+box-sizing:border-box;
+}
+
+button{
+background:#0057ff;
+color:white;
+padding:12px 25px;
+border:none;
+border-radius:8px;
+font-size:18px;
+cursor:pointer;
+}
+
+button:hover{
+background:#0044cc;
+}
+
+</style>
 </head>
+
 <body>
 
-<h1>Đang phát triển...</h1>
+<header>
+<h1>➕ Thêm câu hỏi</h1>
+</header>
+
+<div class="container">
+
+<textarea id="question" rows="4" placeholder="Nhập câu hỏi"></textarea>
+
+<input id="A" placeholder="Đáp án A">
+<input id="B" placeholder="Đáp án B">
+<input id="C" placeholder="Đáp án C">
+<input id="D" placeholder="Đáp án D">
+
+<select id="answer">
+<option>A</option>
+<option>B</option>
+<option>C</option>
+<option>D</option>
+</select>
+
+<textarea id="solution" rows="4" placeholder="Lời giải"></textarea>
+
+<button>
+Lưu câu hỏi
+</button>
+
+</div>
 
 </body>
 </html>
