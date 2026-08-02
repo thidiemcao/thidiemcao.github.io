@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
+
 <title>Quản lý câu hỏi</title>
 
 <style>
@@ -26,66 +28,235 @@ text-align:center;
 }
 
 .container{
-max-width:1200px;
+width:95%;
+max-width:1400px;
 margin:30px auto;
-padding:20px;
 }
 
 .filter{
+
 background:white;
+
 padding:20px;
+
 border-radius:12px;
+
 box-shadow:0 5px 15px rgba(0,0,0,.08);
-margin-bottom:25px;
+
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+
+grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+
 gap:15px;
+
+margin-bottom:25px;
+
 }
 
-select,input{
+input,select{
+
 padding:12px;
-font-size:16px;
+
 border:1px solid #ccc;
+
 border-radius:8px;
+
+font-size:16px;
+
 }
 
 button{
+
 background:#0057ff;
+
 color:white;
+
 border:none;
-padding:12px;
+
+padding:12px 18px;
+
 border-radius:8px;
+
 cursor:pointer;
+
 font-size:16px;
+
+transition:.3s;
+
 }
 
 button:hover{
+
 background:#0044cc;
+
+}
+
+.table-box{
+
+background:white;
+
+border-radius:12px;
+
+overflow:hidden;
+
+box-shadow:0 5px 15px rgba(0,0,0,.08);
+
 }
 
 table{
+
 width:100%;
-background:white;
+
 border-collapse:collapse;
-border-radius:12px;
-overflow:hidden;
-box-shadow:0 5px 15px rgba(0,0,0,.08);
+
 }
 
 th{
+
 background:#0057ff;
+
 color:white;
+
 padding:15px;
+
+font-size:16px;
+
 }
 
 td{
-padding:15px;
+
+padding:14px;
+
 border-bottom:1px solid #eee;
+
+vertical-align:top;
+
+}
+
+tr:hover{
+
+background:#f8f9ff;
+
 }
 
 .action button{
-margin-right:5px;
+
 padding:8px 12px;
+
+margin-right:5px;
+
+font-size:15px;
+
+}
+
+.badge{
+
+display:inline-block;
+
+padding:4px 10px;
+
+border-radius:20px;
+
+font-size:14px;
+
+color:white;
+
+}
+
+.easy{
+
+background:#2ecc71;
+
+}
+
+.medium{
+
+background:#f39c12;
+
+}
+
+.hard{
+
+background:#e74c3c;
+
+}
+
+.pagination{
+
+margin-top:25px;
+
+text-align:center;
+
+}
+
+.pagination button{
+
+margin:5px;
+
+}
+
+.popup{
+
+display:none;
+
+position:fixed;
+
+left:0;
+
+top:0;
+
+width:100%;
+
+height:100%;
+
+background:rgba(0,0,0,.5);
+
+z-index:999;
+
+}
+
+.popup-box{
+
+background:white;
+
+width:90%;
+
+max-width:1000px;
+
+margin:40px auto;
+
+padding:25px;
+
+border-radius:15px;
+
+max-height:90%;
+
+overflow:auto;
+
+}
+
+.close{
+
+float:right;
+
+font-size:30px;
+
+cursor:pointer;
+
+color:#666;
+
+}
+
+.close:hover{
+
+color:red;
+
+}
+
+hr{
+
+margin:20px 0;
+
 }
 
 </style>
@@ -98,6 +269,8 @@ padding:8px 12px;
 
 <h1>📚 Quản lý câu hỏi</h1>
 
+<p>Thi ĐIỂM CAO cùng Thầy Hoàng MpC</p>
+
 </header>
 
 <div class="container">
@@ -105,29 +278,69 @@ padding:8px 12px;
 <div class="filter">
 
 <select id="exam">
+
 <option value="">Tất cả kỳ thi</option>
+
 <option>THPT</option>
+
 <option>ĐGNL</option>
+
 <option>Tuyển sinh 10</option>
+
 <option>Kiểm tra định kỳ</option>
+
+</select>
+
+<select id="bank">
+
+<option value="">Tất cả ngân hàng</option>
+
+<option>1000 Câu Dễ Sai</option>
+
+<option>500 Đề thi thử</option>
+
+<option>250 Đề phát triển chuẩn BGD</option>
+
 </select>
 
 <select id="chapter">
+
 <option value="">Tất cả chuyên đề</option>
+
 <option>Hàm số 12</option>
-<option>Tích phân 12</option>
-<option>Oxyz 12</option>
+
 <option>Thống kê 12</option>
-<option>Xác suất</option>
+
+<option>Tích phân 12</option>
+
+<option>Tọa độ Oxyz 12</option>
+
+<option>Xác suất 10-12</option>
+
+<option>Kiến thức 10+11</option>
+
 </select>
 
-<input id="keyword" placeholder="Tìm kiếm câu hỏi...">
+<input
+type="text"
+id="keyword"
+placeholder="Nhập từ khóa...">
 
 <button id="searchBtn">
-Tìm kiếm
+
+🔍 Tìm kiếm
+
+</button>
+
+<button onclick="location.href='add-question.html'">
+
+➕ Thêm câu hỏi
+
 </button>
 
 </div>
+
+<div class="table-box">
 
 <table>
 
@@ -135,15 +348,15 @@ Tìm kiếm
 
 <tr>
 
-<th>STT</th>
+<th width="60">STT</th>
 
 <th>Câu hỏi</th>
 
-<th>Chuyên đề</th>
+<th width="180">Chuyên đề</th>
 
-<th>Mức độ</th>
+<th width="120">Mức độ</th>
 
-<th>Thao tác</th>
+<th width="220">Thao tác</th>
 
 </tr>
 
@@ -156,108 +369,223 @@ Tìm kiếm
 </table>
 
 </div>
+
+<div class="pagination" id="pagination"></div>
+
+</div>
+
+<div class="popup" id="popup">
+
+<div class="popup-box">
+
+<span class="close"
+onclick="closePopup()">
+
+×
+
+</span>
+
+<h2>📖 Chi tiết câu hỏi</h2>
+
+<hr>
+
+<div id="popupContent"></div>
+
+</div>
+
+</div>
 <script type="module">
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.17.0/firebase-app.js";
 
-import {
+import{
 getFirestore,
 collection,
 getDocs,
+doc,
 getDoc,
-deleteDoc,
-doc
-} from "https://www.gstatic.com/firebasejs/12.17.0/firebase-firestore.js";
+deleteDoc
+}
+from "https://www.gstatic.com/firebasejs/12.17.0/firebase-firestore.js";
 
-const firebaseConfig = {
+const firebaseConfig={
 
-apiKey: "AIzaSyAn5qW3LKUyEAgGBd0Yb8T4_ZoBujQKFbY",
+apiKey:"AIzaSyAn5qW3LKUyEAgGBd0Yb8T4_ZoBujQKFbY",
 
-authDomain: "thidiemcao-4097d.firebaseapp.com",
+authDomain:"thidiemcao-4097d.firebaseapp.com",
 
-projectId: "thidiemcao-4097d",
+projectId:"thidiemcao-4097d",
 
-storageBucket: "thidiemcao-4097d.firebasestorage.app",
+storageBucket:"thidiemcao-4097d.firebasestorage.app",
 
-messagingSenderId: "333180855649",
+messagingSenderId:"333180855649",
 
-appId: "1:333180855649:web:e46ce1e15a715b3f0c5120"
+appId:"1:333180855649:web:e46ce1e15a715b3f0c5120"
 
 };
 
-const app = initializeApp(firebaseConfig);
+const app=initializeApp(firebaseConfig);
 
-const db = getFirestore(app);
+const db=getFirestore(app);
+
+let questions=[];
+
+let page=1;
+
+const perPage=20;
 
 loadQuestions();
 
 async function loadQuestions(){
 
-const snapshot = await getDocs(collection(db,"questions"));
+const snapshot=await getDocs(collection(db,"questions"));
+
+questions=[];
+
+snapshot.forEach(docItem=>{
+
+questions.push({
+
+id:docItem.id,
+
+...docItem.data()
+
+});
+
+});
+
+renderTable();
+
+}
+
+function renderTable(){
 
 let html="";
 
-let stt=1;
+const start=(page-1)*perPage;
 
-snapshot.forEach((item)=>{
+const end=start+perPage;
 
-const q=item.data();
+const list=questions.slice(start,end);
+
+list.forEach((q,index)=>{
+
+let color="easy";
+
+if(q.level.includes("Trung")) color="medium";
+
+if(q.level.includes("Khó")) color="hard";
 
 html+=`
+
 <tr>
 
-<td>${stt++}</td>
+<td>${start+index+1}</td>
 
-<td>${q.question.replace(/<[^>]+>/g,"").substring(0,80)}...</td>
+<td>${removeHTML(q.question).substring(0,80)}...</td>
+
 <td>${q.chapter}</td>
 
-<td>${q.level}</td>
+<td>
+
+<span class="badge ${color}">
+
+${q.level}
+
+</span>
+
+</td>
 
 <td class="action">
 
-<button onclick="editQuestion('${item.id}')">
-✏️
+<button onclick="viewQuestion('${q.id}')">
+
+👁
+
 </button>
 
-<button onclick="viewQuestion('${item.id}')">
-👁️
+<button onclick="editQuestion('${q.id}')">
+
+✏
+
 </button>
 
-<button onclick="removeQuestion('${item.id}')">
-🗑️
+<button onclick="removeQuestion('${q.id}')">
+
+🗑
+
 </button>
 
 </td>
 
 </tr>
+
 `;
 
 });
 
 document.getElementById("questionTable").innerHTML=html;
 
-}
-
-window.editQuestion=function(id){
-
-location.href="edit-question.html?id="+id;
+renderPagination();
 
 }
-window.viewQuestion = async function(id){
 
-const snap = await getDoc(doc(db,"questions",id));
+function renderPagination(){
 
-const q = snap.data();
+let html="";
 
-document.getElementById("popup").style.display = "block";
+const total=Math.ceil(questions.length/perPage);
 
-document.getElementById("popupContent").innerHTML = `
+for(let i=1;i<=total;i++){
+
+html+=`
+
+<button onclick="gotoPage(${i})">
+
+${i}
+
+</button>
+
+`;
+
+}
+
+document.getElementById("pagination").innerHTML=html;
+
+}
+
+window.gotoPage=function(i){
+
+page=i;
+
+renderTable();
+
+}
+
+function removeHTML(text){
+
+if(!text) return "";
+
+return text.replace(/<[^>]*>/g,"");
+
+}
+  window.viewQuestion=async function(id){
+
+const snap=await getDoc(doc(db,"questions",id));
+
+const q=snap.data();
+
+document.getElementById("popup").style.display="block";
+
+document.getElementById("popupContent").innerHTML=`
 
 <p><b>Kỳ thi:</b> ${q.exam}</p>
 
 <p><b>Ngân hàng:</b> ${q.bank}</p>
 
 <p><b>Chuyên đề:</b> ${q.chapter}</p>
+
+<p><b>Bài học:</b> ${q.lesson}</p>
 
 <hr>
 
@@ -275,7 +603,17 @@ ${q.question}
 
 <hr>
 
-<p><b>Đáp án đúng:</b> ${q.answer}</p>
+<p>
+
+<b>Đáp án đúng:</b>
+
+<span style="color:red;font-size:22px;">
+
+${q.answer}
+
+</span>
+
+</p>
 
 <hr>
 
@@ -290,9 +628,10 @@ window.closePopup=function(){
 document.getElementById("popup").style.display="none";
 
 }
-window.removeQuestion=async function(id){
 
-if(!confirm("Xóa câu hỏi này?")) return;
+  window.removeQuestion=async function(id){
+
+if(!confirm("Bạn có chắc muốn xóa?")) return;
 
 await deleteDoc(doc(db,"questions",id));
 
@@ -302,40 +641,53 @@ loadQuestions();
 
 }
 
+window.editQuestion=function(id){
+
+location.href="edit-question.html?id="+id;
+
+}
+  document.getElementById("searchBtn").onclick=function(){
+
+const exam=document.getElementById("exam").value;
+
+const bank=document.getElementById("bank").value;
+
+const chapter=document.getElementById("chapter").value;
+
+const keyword=document.getElementById("keyword").value.toLowerCase();
+
+const rows=questions.filter(q=>{
+
+return(
+
+(exam==""||q.exam==exam)
+
+&&
+
+(bank==""||q.bank==bank)
+
+&&
+
+(chapter==""||q.chapter==chapter)
+
+&&
+
+(removeHTML(q.question).toLowerCase().includes(keyword))
+
+);
+
+});
+
+questions=rows;
+
+page=1;
+
+renderTable();
+
+}
+
 </script>
-  <div id="popup" style="
-display:none;
-position:fixed;
-left:0;
-top:0;
-width:100%;
-height:100%;
-background:rgba(0,0,0,.5);
-">
 
-<div style="
-background:white;
-width:90%;
-max-width:900px;
-margin:40px auto;
-padding:25px;
-border-radius:12px;
-max-height:90%;
-overflow:auto;
-">
-
-<h2>📖 Chi tiết câu hỏi</h2>
-
-<div id="popupContent"></div>
-
-<br>
-
-<button onclick="closePopup()">
-Đóng
-</button>
-
-</div>
-
-</div>
 </body>
+
 </html>
