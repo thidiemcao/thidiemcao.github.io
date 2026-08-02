@@ -10,7 +10,42 @@ const textC = document.getElementById("textC");
 const textD = document.getElementById("textD");
 
 const radios = document.getElementsByName("answer");
+// ======================
+// ĐỒNG HỒ ĐẾM NGƯỢC
+// ======================
 
+let totalTime = 90 * 60;
+
+const timeElement = document.getElementById("time");
+
+function updateTimer(){
+
+    const minutes = Math.floor(totalTime / 60);
+    const seconds = totalTime % 60;
+
+    timeElement.innerHTML =
+        String(minutes).padStart(2,"0") +
+        ":" +
+        String(seconds).padStart(2,"0");
+
+    if(totalTime <= 0){
+
+        clearInterval(timer);
+
+        alert("⏰ Hết giờ!");
+
+        document.getElementById("submitBtn").click();
+
+        return;
+    }
+
+    totalTime--;
+
+}
+
+updateTimer();
+
+const timer = setInterval(updateTimer,1000);
 function loadQuestion(index){
 
     const q = questions[index];
