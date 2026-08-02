@@ -250,14 +250,14 @@ else{
 aiBox.style.display = "block";
 
 aiBox.innerHTML = `
-<h3>🤖 AI nhận xét bài làm</h3>
+<h3>🤖 Nhận xét bài làm:</h3>
 
 <p><b>Điểm:</b> ${score}/${questions.length} (${percent}%)</p>
 
 <p class="good">${comment}</p>
 
 <div class="tip">
-<b>🎯 AI gợi ý:</b><br>
+<b>🎯 Thầy Hoàng khuyên em:</b><br>
 ${advice}
 </div>
 `;
