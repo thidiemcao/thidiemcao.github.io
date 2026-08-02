@@ -100,13 +100,23 @@ window.login = async function(){
 
   try{
 
-    await setDoc(doc(db,"hoc_sinh",phone),{
+    await setDoc(
+    doc(db,"hoc_sinh",phone),
+    {
 
-      ten:name,
-      sdt:phone,
-      time:new Date().toISOString()
+        ten:name,
 
-    });
+        sdt:phone,
+
+        time:new Date().toISOString()
+
+    },
+    {
+
+        merge:true
+
+    }
+);
 
     localStorage.setItem("studentName",name);
     localStorage.setItem("studentPhone",phone);
