@@ -5,8 +5,7 @@
 
 <meta charset="UTF-8">
 
-<meta name="viewport"
-content="width=device-width,initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Thiết lập mục tiêu</title>
 
@@ -18,125 +17,7 @@ padding:0;
 box-sizing:border-box;
 font-family:Arial,sans-serif;
 }
-<script>
 
-const grade=document.getElementById("grade");
-
-const goal=document.getElementById("goal");
-
-grade.onchange=function(){
-
-goal.innerHTML="";
-
-if(grade.value=="9"){
-
-goal.innerHTML=`
-
-<option>Đỗ THPT Chuyên</option>
-
-<option>Đỗ THPT công lập</option>
-
-<option>Đỗ THPT Chuyên Lam Sơn</option>
-
-<option>Đỗ THPT Chuyên KHTN</option>
-
-<option>Đỗ THPT Chuyên Amsterdam</option>
-
-<option>Đỗ THPT Chuyên Phan Bội Châu</option>
-
-<option>Đỗ THPT Chuyên Lê Hồng Phong</option>
-
-`;
-
-}
-
-if(grade.value=="10"){
-
-goal.innerHTML=`
-
-<option>Học sinh Xuất sắc</option>
-
-<option>Điểm TB ≥ 9.0</option>
-
-<option>Top 10 lớp</option>
-
-<option>Top 5 lớp</option>
-
-`;
-
-}
-
-if(grade.value=="11"){
-
-goal.innerHTML=`
-
-<option>Học sinh Xuất sắc</option>
-
-<option>Điểm TB ≥ 9.2</option>
-
-<option>Top 5 lớp</option>
-
-<option>Chuẩn bị thi THPT</option>
-
-`;
-
-}
-
-if(grade.value=="12"){
-
-goal.innerHTML=`
-
-<option>Đỗ Đại học Bách Khoa Hà Nội</option>
-
-<option>Đỗ Đại học Y Hà Nội</option>
-
-<option>Đỗ Đại học Ngoại thương</option>
-
-<option>Đỗ Đại học Kinh tế Quốc dân</option>
-
-<option>Đỗ Đại học Sư phạm Hà Nội</option>
-
-<option>Đỗ Đại học Công nghệ - ĐHQGHN</option>
-
-<option>Đỗ Học viện Kỹ thuật Quân sự</option>
-
-<option>Đỗ Học viện An ninh</option>
-
-<option>Đỗ Học viện Cảnh sát</option>
-
-`;
-
-}
-
-};
-
-document.getElementById("saveBtn").onclick=function(){
-
-if(grade.value==""){
-
-alert("Hãy chọn lớp.");
-
-return;
-
-}
-
-localStorage.setItem("goalGrade",grade.value);
-
-localStorage.setItem("goal",goal.value);
-
-localStorage.setItem("goalPercent",0);
-
-alert("🎉 Thiết lập mục tiêu thành công!");
-
-location.href="index.html";
-
-}
-
-</script>
-
-</body>
-
-</html>
 body{
 
 background:#f4f6fb;
@@ -147,8 +28,14 @@ header{
 
 background:#0057ff;
 color:white;
-padding:20px;
+padding:25px;
 text-align:center;
+
+}
+
+header h1{
+
+font-size:32px;
 
 }
 
@@ -156,13 +43,9 @@ text-align:center;
 
 max-width:700px;
 margin:40px auto;
-
 background:white;
-
 padding:35px;
-
 border-radius:20px;
-
 box-shadow:0 10px 30px rgba(0,0,0,.08);
 
 }
@@ -170,52 +53,49 @@ box-shadow:0 10px 30px rgba(0,0,0,.08);
 h2{
 
 margin-bottom:25px;
+color:#0057ff;
 
 }
 
 label{
 
 display:block;
-margin-top:20px;
+margin-top:22px;
 font-weight:bold;
+font-size:18px;
 
 }
 
 select{
 
 width:100%;
-
-padding:12px;
-
+padding:13px;
 margin-top:10px;
-
 font-size:17px;
-
-border-radius:8px;
-
+border-radius:10px;
 border:1px solid #ccc;
+outline:none;
+
+}
+
+select:focus{
+
+border-color:#0057ff;
 
 }
 
 button{
 
 margin-top:35px;
-
 width:100%;
-
-background:#0057ff;
-
-color:white;
-
-border:none;
-
-padding:15px;
-
+padding:16px;
 font-size:20px;
-
+border:none;
 border-radius:10px;
-
 cursor:pointer;
+background:#0057ff;
+color:white;
+transition:.3s;
 
 }
 
@@ -225,15 +105,42 @@ background:#0044cc;
 
 }
 
+.info{
+
+margin-top:25px;
+padding:18px;
+background:#eef5ff;
+border-left:5px solid #0057ff;
+border-radius:10px;
+
+}
+
+.info h3{
+
+margin-bottom:10px;
+color:#0057ff;
+
+}
+
+.info p{
+
+line-height:1.6;
+
+}
+
 </style>
 
 </head>
-<script type="module" src="js/goal.js"></script>
+
 <body>
 
 <header>
 
-<h1>🎯 Thiết lập mục tiêu</h1>
+<h1>🎯 Thiết lập mục tiêu học tập</h1>
+
+<p>
+Hãy chọn mục tiêu để đồng hành cùng Thi ĐIỂM CAO
+</p>
 
 </header>
 
@@ -241,21 +148,47 @@ background:#0044cc;
 
 <h2>
 
-Em đang học lớp nào?
+Mục tiêu của em
 
 </h2>
 
+<label>
+
+Em đang học lớp
+
+</label>
+
 <select id="grade">
 
-<option value="">-- Chọn lớp --</option>
+<option value="">
 
-<option>9</option>
+-- Chọn lớp --
 
-<option>10</option>
+</option>
 
-<option>11</option>
+<option value="9">
 
-<option>12</option>
+Lớp 9
+
+</option>
+
+<option value="10">
+
+Lớp 10
+
+</option>
+
+<option value="11">
+
+Lớp 11
+
+</option>
+
+<option value="12">
+
+Lớp 12
+
+</option>
 
 </select>
 
@@ -275,10 +208,34 @@ Hãy chọn lớp trước
 
 </select>
 
+<div class="info">
+
+<h3>
+
+💡 Gợi ý
+
+</h3>
+
+<p>
+
+Thiết lập mục tiêu sẽ giúp hệ thống theo dõi tiến độ học tập, chuỗi ngày học liên tiếp và huy hiệu của em.
+
+</p>
+
+</div>
+
 <button id="saveBtn">
 
-Lưu mục tiêu
+🚀 Lưu mục tiêu
 
 </button>
 
 </div>
+
+<!-- Firebase -->
+
+<script type="module" src="js/goal.js"></script>
+
+</body>
+
+</html>
