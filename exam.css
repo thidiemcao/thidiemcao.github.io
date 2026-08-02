@@ -632,3 +632,60 @@ body{
 }
 
 }
+/* ==========================
+   AI NHẬN XÉT
+========================== */
+
+.ai-box{
+    display:none;
+    margin-top:30px;
+    padding:25px;
+    background:#f8fbff;
+    border-left:6px solid #0057ff;
+    border-radius:15px;
+    box-shadow:0 5px 15px rgba(0,0,0,.08);
+    animation:fadeIn .4s;
+}
+
+.ai-box h3{
+    color:#0057ff;
+    margin-bottom:15px;
+    font-size:24px;
+}
+
+.ai-box p{
+    font-size:18px;
+    line-height:1.8;
+    margin:8px 0;
+}
+
+.ai-box .good{
+    color:#00a651;
+    font-weight:bold;
+}
+
+.ai-box .bad{
+    color:#e53935;
+    font-weight:bold;
+}
+
+.ai-box .tip{
+    margin-top:15px;
+    padding:15px;
+    background:#eef5ff;
+    border-radius:10px;
+}
+
+@keyframes fadeIn{
+
+from{
+    opacity:0;
+    transform:translateY(20px);
+}
+
+to{
+    opacity:1;
+    transform:translateY(0);
+}
+
+}
