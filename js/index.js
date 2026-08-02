@@ -58,20 +58,43 @@ async function loadGoal(){
 
     if(!studentPhone) return;
 
+    document.getElementById("goalCard").style.display="block";
+
     try{
 
         const ref = doc(db,"goals",studentPhone);
 
         const snap = await getDoc(ref);
 
-        if(!snap.exists()) return;
+        if(!snap.exists()){
+
+            document.getElementById("goalName").innerHTML =
+            "🎯 Em chưa thiết lập mục tiêu";
+
+            document.getElementById("goalPercent").innerHTML =
+            "0% hoàn thành";
+
+            document.getElementById("goalBar").style.width = "0%";
+
+            document.getElementById("streak").innerHTML = "0 ngày";
+
+            document.getElementById("badge").innerHTML = "🌱 Khởi đầu";
+
+            document.getElementById("questionCount").innerHTML = "0 câu";
+
+            document.getElementById("examCount").innerHTML = "0 đề";
+
+            document.getElementById("goalBtn").innerHTML =
+            "🎯 Thiết lập mục tiêu";
+
+            return;
+
+        }
 
         const data = snap.data();
 
-        document.getElementById("goalCard").style.display="block";
-
         document.getElementById("goalName").innerHTML =
-        "🎯 " + (data.goal || "Chưa thiết lập");
+        "🎯 " + data.goal;
 
         const progress = data.progress || 0;
 
@@ -93,9 +116,10 @@ async function loadGoal(){
         document.getElementById("examCount").innerHTML =
         (data.totalExam || 0) + " đề";
 
-    }
+        document.getElementById("goalBtn").innerHTML =
+        "⚙️ Chỉnh sửa mục tiêu";
 
-    catch(err){
+    }catch(err){
 
         console.log(err);
 
