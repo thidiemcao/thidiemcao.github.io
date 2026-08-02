@@ -18,7 +18,125 @@ padding:0;
 box-sizing:border-box;
 font-family:Arial,sans-serif;
 }
+<script>
 
+const grade=document.getElementById("grade");
+
+const goal=document.getElementById("goal");
+
+grade.onchange=function(){
+
+goal.innerHTML="";
+
+if(grade.value=="9"){
+
+goal.innerHTML=`
+
+<option>Đỗ THPT Chuyên</option>
+
+<option>Đỗ THPT công lập</option>
+
+<option>Đỗ THPT Chuyên Lam Sơn</option>
+
+<option>Đỗ THPT Chuyên KHTN</option>
+
+<option>Đỗ THPT Chuyên Amsterdam</option>
+
+<option>Đỗ THPT Chuyên Phan Bội Châu</option>
+
+<option>Đỗ THPT Chuyên Lê Hồng Phong</option>
+
+`;
+
+}
+
+if(grade.value=="10"){
+
+goal.innerHTML=`
+
+<option>Học sinh Xuất sắc</option>
+
+<option>Điểm TB ≥ 9.0</option>
+
+<option>Top 10 lớp</option>
+
+<option>Top 5 lớp</option>
+
+`;
+
+}
+
+if(grade.value=="11"){
+
+goal.innerHTML=`
+
+<option>Học sinh Xuất sắc</option>
+
+<option>Điểm TB ≥ 9.2</option>
+
+<option>Top 5 lớp</option>
+
+<option>Chuẩn bị thi THPT</option>
+
+`;
+
+}
+
+if(grade.value=="12"){
+
+goal.innerHTML=`
+
+<option>Đỗ Đại học Bách Khoa Hà Nội</option>
+
+<option>Đỗ Đại học Y Hà Nội</option>
+
+<option>Đỗ Đại học Ngoại thương</option>
+
+<option>Đỗ Đại học Kinh tế Quốc dân</option>
+
+<option>Đỗ Đại học Sư phạm Hà Nội</option>
+
+<option>Đỗ Đại học Công nghệ - ĐHQGHN</option>
+
+<option>Đỗ Học viện Kỹ thuật Quân sự</option>
+
+<option>Đỗ Học viện An ninh</option>
+
+<option>Đỗ Học viện Cảnh sát</option>
+
+`;
+
+}
+
+};
+
+document.getElementById("saveBtn").onclick=function(){
+
+if(grade.value==""){
+
+alert("Hãy chọn lớp.");
+
+return;
+
+}
+
+localStorage.setItem("goalGrade",grade.value);
+
+localStorage.setItem("goal",goal.value);
+
+localStorage.setItem("goalPercent",0);
+
+alert("🎉 Thiết lập mục tiêu thành công!");
+
+location.href="index.html";
+
+}
+
+</script>
+
+</body>
+
+</html>
 body{
 
 background:#f4f6fb;
