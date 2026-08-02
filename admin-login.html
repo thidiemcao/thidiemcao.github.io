@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Đăng nhập Quản trị</title>
+
+<style>
+
+body{
+margin:0;
+font-family:Arial;
+background:#f5f7fb;
+display:flex;
+justify-content:center;
+align-items:center;
+height:100vh;
+}
+
+.box{
+background:white;
+padding:40px;
+width:380px;
+border-radius:15px;
+box-shadow:0 5px 15px rgba(0,0,0,.1);
+}
+
+h2{
+text-align:center;
+margin-bottom:30px;
+}
+
+input{
+width:100%;
+padding:12px;
+margin:10px 0;
+border:1px solid #ccc;
+border-radius:8px;
+box-sizing:border-box;
+}
+
+button{
+width:100%;
+padding:12px;
+background:#0057ff;
+color:white;
+border:none;
+border-radius:8px;
+font-size:18px;
+cursor:pointer;
+}
+
+button:hover{
+background:#0044cc;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="box">
+
+<h2>👨‍🏫 Đăng nhập Quản trị</h2>
+
+<input id="user" placeholder="Tên đăng nhập">
+
+<input id="pass" type="password" placeholder="Mật khẩu">
+
+<button onclick="login()">
+Đăng nhập
+</button>
+
+</div>
+
+<script>
+
+function login(){
+
+const user=document.getElementById("user").value;
+
+const pass=document.getElementById("pass").value;
+
+if(user=="admin" && pass=="123456"){
+
+localStorage.setItem("admin","true");
+
+location.href="admin.html";
+
+}else{
+
+alert("Sai tài khoản hoặc mật khẩu.");
+
+}
+
+}
+
+</script>
+
+</body>
+</html>
