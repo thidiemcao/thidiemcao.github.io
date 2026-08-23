@@ -215,3 +215,403 @@ window.vaoThi=function(link){
     location.href=link;
 
 }
+/* =====================================
+   TRÁI TIM HẠT CHUYỂN ĐỘNG
+===================================== */
+
+const canvas = document.getElementById("heartCanvas");
+
+if(canvas){
+
+    const ctx = canvas.getContext("2d");
+
+    const particles = [];
+
+    function resizeCanvas(){
+
+        const rect =
+            canvas.getBoundingClientRect();
+
+        canvas.width = rect.width;
+
+        canvas.height = rect.height;
+
+    }
+
+
+    resizeCanvas();
+
+    window.addEventListener(
+        "resize",
+        resizeCanvas
+    );
+
+
+    /* =========================
+       CÔNG THỨC HÌNH TRÁI TIM
+    ========================= */
+
+    function heartShape(t){
+
+        const x =
+            16 *
+            Math.pow(
+                Math.sin(t),
+                3
+            );
+
+
+        const y =
+            13 * Math.cos(t)
+            -
+            5 * Math.cos(2 * t)
+            -
+            2 * Math.cos(3 * t)
+            -
+            Math.cos(4 * t);
+
+
+        return{
+            x:x,
+            y:y
+        };
+
+    }
+
+
+    /* =========================
+       TẠO HẠT
+    ========================= */
+
+    function createParticles(){
+
+        particles.length = 0;
+
+
+        const particleCount =
+            window.innerWidth < 600
+            ? 700
+            : 1600;
+
+
+        for(
+            let i = 0;
+            i < particleCount;
+            i++
+        ){
+
+            const angle =
+                Math.random()
+                *
+                Math.PI
+                *
+                2;
+
+
+            particles.push({
+
+                angle:angle,
+
+                speed:
+                    0.001
+                    +
+                    Math.random()
+                    *
+                    0.003,
+
+
+                offsetX:
+                    (
+                        Math.random()
+                        - 0.5
+                    )
+                    *
+                    18,
+
+
+                offsetY:
+                    (
+                        Math.random()
+                        - 0.5
+                    )
+                    *
+                    18,
+
+
+                size:
+                    0.8
+                    +
+                    Math.random()
+                    *
+                    1.8,
+
+
+                phase:
+                    Math.random()
+                    *
+                    Math.PI
+                    *
+                    2
+
+            });
+
+        }
+
+    }
+
+
+    createParticles();
+
+
+    window.addEventListener(
+        "resize",
+        function(){
+
+            resizeCanvas();
+
+            createParticles();
+
+        }
+    );
+
+
+    /* =========================
+       VẼ VÀ CHUYỂN ĐỘNG
+    ========================= */
+
+    function animate(time){
+
+        ctx.clearRect(
+            0,
+            0,
+            canvas.width,
+            canvas.height
+        );
+
+
+        const centerX =
+            canvas.width / 2;
+
+
+        const centerY =
+            canvas.height / 2
+            +
+            25;
+
+
+        /* NHỊP ĐẬP */
+
+        const beat =
+            1
+            +
+            Math.sin(
+                time * 0.003
+            )
+            *
+            0.035;
+
+
+        const scale =
+            Math.min(
+
+                canvas.width / 40,
+
+                canvas.height / 32
+
+            )
+            *
+            beat;
+
+
+        particles.forEach(function(p){
+
+            const movingAngle =
+                p.angle
+                +
+                time
+                *
+                p.speed;
+
+
+            const point =
+                heartShape(
+                    movingAngle
+                );
+
+
+            const waveX =
+                Math.sin(
+                    time * 0.002
+                    +
+                    p.phase
+                )
+                *
+                p.offsetX;
+
+
+            const waveY =
+                Math.cos(
+                    time * 0.002
+                    +
+                    p.phase
+                )
+                *
+                p.offsetY;
+
+
+            const x =
+                centerX
+                +
+                point.x
+                *
+                scale
+                +
+                waveX;
+
+
+            const y =
+                centerY
+                -
+                point.y
+                *
+                scale
+                +
+                waveY;
+
+
+            const alpha =
+                0.5
+                +
+                Math.sin(
+                    time * 0.003
+                    +
+                    p.phase
+                )
+                *
+                0.3;
+
+
+            ctx.beginPath();
+
+
+            ctx.arc(
+
+                x,
+
+                y,
+
+                p.size,
+
+                0,
+
+                Math.PI * 2
+
+            );
+
+
+            ctx.fillStyle =
+                "rgba(255,105,180,"
+                +
+                alpha
+                +
+                ")";
+
+
+            ctx.fill();
+
+        });
+
+
+        requestAnimationFrame(
+            animate
+        );
+
+    }
+
+
+    requestAnimationFrame(
+        animate
+    );
+
+
+    /* =====================================
+       CHỮ HIỆN DẦN TỪNG CHỮ
+    ===================================== */
+
+    const messageBox =
+        document.getElementById(
+            "heartMessage"
+        );
+
+
+    const message = [
+
+        "IU TOÁN",
+
+        "CÙNG THẦY HOÀNG"
+
+    ];
+
+
+    let wordIndex = 0;
+
+
+    function showMessage(){
+
+        if(
+            wordIndex
+            >=
+            message.length
+        ){
+
+            return;
+
+        }
+
+
+        const word =
+            document.createElement(
+                "div"
+            );
+
+
+        word.className =
+            "heart-word";
+
+
+        word.innerHTML =
+            message[wordIndex];
+
+
+        word.style.animationDelay =
+            "0.1s";
+
+
+        messageBox.appendChild(
+            word
+        );
+
+
+        wordIndex++;
+
+
+        setTimeout(
+
+            showMessage,
+
+            900
+
+        );
+
+    }
+
+
+    setTimeout(
+
+        showMessage,
+
+        1000
+
+    );
+
+}
