@@ -615,3 +615,218 @@ if(canvas){
     );
 
 }
+/* ==============================
+   TRÁI TIM IU TOÁN CÙNG THẦY HOÀNG
+================================= */
+
+const heartCanvas = document.getElementById("heartCanvas");
+const heartMessage = document.getElementById("heartMessage");
+
+if (heartCanvas && heartMessage) {
+
+    const ctx = heartCanvas.getContext("2d");
+
+    let width;
+    let height;
+    let particles = [];
+
+    function resizeHeart() {
+
+        const rect = heartCanvas.getBoundingClientRect();
+
+        width = rect.width;
+        height = rect.height;
+
+        const ratio = window.devicePixelRatio || 1;
+
+        heartCanvas.width = width * ratio;
+        heartCanvas.height = height * ratio;
+
+        ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
+    }
+
+    resizeHeart();
+
+    window.addEventListener("resize", () => {
+
+        resizeHeart();
+
+        createHeart();
+
+    });
+
+
+    /* ==============================
+       TẠO HÌNH TRÁI TIM
+    ================================= */
+
+    function heartPoint(t) {
+
+        const x =
+            16 * Math.pow(Math.sin(t), 3);
+
+        const y =
+            13 * Math.cos(t)
+            - 5 * Math.cos(2 * t)
+            - 2 * Math.cos(3 * t)
+            - Math.cos(4 * t);
+
+        return { x, y };
+    }
+
+
+    function createHeart() {
+
+        particles = [];
+
+        const totalParticles = 1800;
+
+        const scale = Math.min(width, height) * 0.026;
+
+        for (let i = 0; i < totalParticles; i++) {
+
+            const t =
+                (Math.PI * 2 * i) / totalParticles;
+
+            const point = heartPoint(t);
+
+            const spread = (Math.random() - 0.5) * 20;
+
+            const targetX =
+                width / 2
+                + point.x * scale
+                + spread;
+
+            const targetY =
+                height / 2
+                - point.y * scale
+                + spread;
+
+            particles.push({
+
+                x:
+                    width / 2
+                    + (Math.random() - 0.5) * width,
+
+                y:
+                    height / 2
+                    + (Math.random() - 0.5) * height,
+
+                targetX: targetX,
+
+                targetY: targetY,
+
+                size:
+                    Math.random() * 2.8 + 1,
+
+                speed:
+                    Math.random() * 0.03 + 0.02,
+
+                alpha:
+                    Math.random() * 0.5 + 0.5
+
+            });
+
+        }
+
+    }
+
+
+    createHeart();
+
+
+    /* ==============================
+       VẼ + CHUYỂN ĐỘNG TRÁI TIM
+    ================================= */
+
+    let startTime = Date.now();
+
+    function animateHeart() {
+
+        ctx.clearRect(0, 0, width, height);
+
+        const elapsed =
+            (Date.now() - startTime) / 1000;
+
+        particles.forEach((p) => {
+
+            const dx = p.targetX - p.x;
+            const dy = p.targetY - p.y;
+
+            p.x += dx * p.speed;
+            p.y += dy * p.speed;
+
+            const pulse =
+                Math.sin(elapsed * 2) * 0.015 + 1;
+
+            const drawX =
+                width / 2
+                + (p.x - width / 2) * pulse;
+
+            const drawY =
+                height / 2
+                + (p.y - height / 2) * pulse;
+
+            ctx.beginPath();
+
+            ctx.arc(
+                drawX,
+                drawY,
+                p.size,
+                0,
+                Math.PI * 2
+            );
+
+            ctx.fillStyle =
+                `rgba(255, 80, 170, ${p.alpha})`;
+
+            ctx.fill();
+
+        });
+
+        requestAnimationFrame(animateHeart);
+
+    }
+
+    animateHeart();
+
+
+    /* ==============================
+       CHỮ HIỆN TỪNG CHỮ
+    ================================= */
+
+    const message =
+        "IU TOÁN CÙNG THẦY HOÀNG";
+
+    let characterIndex = 0;
+
+    heartMessage.innerHTML = "";
+
+    function typeMessage() {
+
+        if (characterIndex < message.length) {
+
+            heartMessage.innerHTML +=
+                message.charAt(characterIndex);
+
+            characterIndex++;
+
+            setTimeout(
+                typeMessage,
+                110
+            );
+
+        }
+
+    }
+
+
+    /* Đợi trái tim tạo hình rồi mới hiện chữ */
+
+    setTimeout(() => {
+
+        typeMessage();
+
+    }, 2200);
+
+}
